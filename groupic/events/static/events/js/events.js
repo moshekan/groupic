@@ -2,7 +2,7 @@ function loadEvent(id){
 	//Put loading symbol
 
 	//Make ajax request
-	.ajax( "/ASKJOSH" )
+	$.ajax( "/ASKJOSH" )
   .done(function(eventsArray) {
   	//When ajax request ends- loadPhotos(photos)
     loadPhotos(eventsArray);

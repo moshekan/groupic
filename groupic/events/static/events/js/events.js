@@ -2,14 +2,15 @@ function loadEvent(id){
 	//Put loading symbol
 
 	//Make ajax request
-	$.ajax( "/ASKJOSH" )
+	/*$.ajax( "/ASKJOSH" )
   		.done(function(eventsArray) {
   		//When ajax request ends- loadPhotos(photos)
     		loadPhotos(eventsArray);
   		})
    .fail(function() {
     console.log("Error");
-  });
+  });*/
+alert(id);
 	
 
 }
@@ -29,6 +30,8 @@ function goBack(){
 
 	//Load back events
 }
+
+
 
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {

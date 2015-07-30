@@ -1,7 +1,9 @@
     {% extends "base.html" %}
     {% load staticfiles %}
     {% block styles %}
-         <link rel="stylesheet" href="{% static "static/css/main.css"%}">
+
+         <link rel="stylesheet" href="{% static "events/css/main.css"%}">
+
     {% endblock %}
     {% block content %}
     <div class="row">
@@ -11,29 +13,22 @@
                         <img class="img-responsive" src="http://placehold.it/400x300" alt="">
                     </a>
                 </div>
-                <div  class="col-lg-3 col-md-4 col-xs-6 thumb">
+
+                {%for event in events%}
+                    <div  class="col-lg-3 col-md-4 col-xs-6 thumb">
                     <a class="thumbnail" href="#">
-                        <span class="eventName">Name</span>
+                        <span class="eventName">{{event.eventName}}</span>
                         <img class="img-responsive" src="http://placehold.it/400x300" alt="">
                     </a>
                 </div>
-                <div  class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <span class="eventName">Name</span>
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div  class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <span class="eventName">Name</span>
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div  class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <span class="eventName">Name</span>
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
+                {% endfor %}
+                
+                
         	</div>
         {% endblock %}
+
+        {% block scripts %}
+
+         <script src="myscripts.js"></script>
+
+    {% endblock %}

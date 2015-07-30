@@ -13,8 +13,9 @@ function loadEvent(id){
 	
 
 }
-
+loadPhotos("eee");
 function loadPhotos(photos){
+	alert(photos);
 	//Throw away the events except the one we loaded - (keep them)
 
 	//create elements for images underneat main

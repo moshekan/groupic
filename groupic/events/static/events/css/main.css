@@ -3,20 +3,25 @@
 	top: 15px;
 }
 
-.gallery {
-  width: 100%;
-  float: left;
-}
 .gallery img {
   width: 100%;
   height: auto;
 }
+
 .gallery figure {
-  display: block;
-  float: left;
+  display: inline-block;
   margin: 0 5px 5px 0;
   width: 150px;
 }
+
 .gallery figcaption {
   display: none;
 }
+
+#viewContainer {
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+

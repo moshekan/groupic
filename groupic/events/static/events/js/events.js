@@ -2,7 +2,7 @@ function loadEvent(id){
 	//Put loading symbol
 
 	//Make ajax request
-	.ajax( "/ASKJOSH" )
+	$.ajax( "/ASKJOSH" )
   .done(function(eventsArray) {
   	//When ajax request ends- loadPhotos(photos)
     loadPhotos(eventsArray);
@@ -13,8 +13,9 @@ function loadEvent(id){
 	
 
 }
-
+loadPhotos("eee");
 function loadPhotos(photos){
+	alert(photos);
 	//Throw away the events except the one we loaded - (keep them)
 
 	//create elements for images underneat main

@@ -2,14 +2,19 @@
 {% load staticfiles %}
 {% block styles %}
 
+             <!-- Core CSS file -->
+        <link rel="stylesheet" href="{% static "events/css/photoswipe.css" %}">
+
+        <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
+             In the folder of skin CSS file there are also:
+             - .png and .svg icons sprite, 
+             - preloader.gif (for browsers that do not support CSS animations) -->
+        <link rel="stylesheet" href="{% static "events/default-skin/default-skin.css" %}">
+
      <link rel="stylesheet" href="{% static "events/css/main.css"%}">
 
 {% endblock %}
-{% block scripts %}
 
-     <script src="{% static "events/js/events.js"%}"></script>
-
-{% endblock %}
 {% block content %}
 <div class="row">
     		<div  class="col-lg-3 col-md-4 col-xs-6 thumb">
@@ -54,6 +59,7 @@
 
             <div class="pswp__top-bar">
 
+
                 <!--  Controls are self-explanatory. Order can be changed. -->
 
                 <div class="pswp__counter"></div>
@@ -95,6 +101,16 @@
 
     </div>
 
+
 </div>
+{% endblock %}
+        {% block scripts %}
+        <!-- Core JS file -->
+        <script src="{% static "events/js/photoswipe.min.js" %}"></script>
+
+        <!-- UI JS file -->
+        <script src="{% static "events/js/photoswipe-ui-default.min.js" %}"></script>
+             <script src="{% static "events/js/events.js"%}"></script>
+
 
     {% endblock %}

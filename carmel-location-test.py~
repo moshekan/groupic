@@ -1,0 +1,9 @@
+from geopy.geocoders import Nominatim
+geolocator = Nominatim()
+
+def return_place(media):
+	my_latitude = media.location.point.latitude
+	my_longitude = media.location.point.longitude
+	location = geolocator.reverse(my_latitude, my_longitude)
+	return location.address
+

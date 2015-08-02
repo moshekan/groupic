@@ -5,6 +5,8 @@ from geopy.geocoders import Nominatim
 
 DISTANCE = 5000
 
+
+LONDON = (51.507351, -0.127758)
 GAZA = (31.354676, 34.308826)
 JERUSALEM = (31.768319, 35.213710)
 RAMALLAH = (31.898043, 35.204271) 
@@ -13,6 +15,9 @@ RAMALLAH = (31.898043, 35.204271)
 EVENTS = {
 'gaza-war-2015': {'tags': {'gaza','gaza4life','gazawillbefree','gazaunderattack'},
 		'locations': [GAZA, JERUSALEM, RAMALLAH]
+		}
+'olympics-summer-2012': {'tags': {'olympics', 'olympics2012', 'olympicsherewecome'}, 
+		'locations': [LONDON]
 		}
 }
 

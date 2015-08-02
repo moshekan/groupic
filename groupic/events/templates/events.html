@@ -48,11 +48,11 @@
           </figure>-->
           
           {%for key,value in events.items%}
-            <section>
-				<figure class="stack stack-spread">
-					<img src="{{value.1.thumbnail}}" alt="img03"/>
-					<img src="{{value.2.thumbnail}}" alt="img02"/>
-					<img src="{{value.3.thumbnail}}" alt="img01"/>
+            <section id="eventsGallery">
+				<figure class="stack stack-spread" onclick="loadEvent('{{ key }}')">
+					<img src="{{value.14.thumbnail}}" alt="img03"/>
+					<img src="{{value.24.thumbnail}}" alt="img02"/>
+					<img src="{{value.34.thumbnail}}" alt="img01"/>
 				</figure>
 			</section>
           {% endfor %}
@@ -150,6 +150,10 @@
              <script src="{% static "events/js/classie.js"%}"></script>
 			<script src="{% static "events/js/main.js"%}"></script>
 
+    {% endblock %}
+    
+    {% block footer %}
+    fuck
     {% endblock %}
 
     

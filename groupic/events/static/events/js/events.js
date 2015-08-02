@@ -254,3 +254,34 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     }
 };
 
+$(document).ready(function() {
+    var sideBarOpen = false;
+    $("#navSideBar").click(function() {
+        if (!sideBarOpen) {
+            $("#navSideBar").animate({
+                left : "0px"
+            }, 500);
+            $("#hotfix2").animate({
+                left : "0px"
+            }, 500);
+            sideBarOpen = true;
+            $(".navs").css({
+                display : "block"
+            });
+        }else {
+            $("#navSideBar").animate({
+                left : "-130px"
+            }, 500);
+            $("#hotfix2").animate({
+                left : "-130px"
+            }, 500);
+            sideBarOpen = false;
+            setTimeout(function (){
+                $(".navs").css({
+                    display : "none"
+                });
+            }, 500);
+            
+        }
+    });
+});

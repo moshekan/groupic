@@ -5,8 +5,33 @@
     {% block styles %}{% endblock %}
 </head>
 <body >
-    
-    <div id="viewContainer" >
+    <div id="hotFix">
+
+		<!-- header transparent, content goes under it on scroll, fixed ==> put white div underneath header and content underneath this div -->
+
+	</div>
+
+	<div id="header">
+
+		<img src="images/Logo.png">
+
+	</div>
+
+	<div id="hotfix2">
+
+		<!-- NavSideBar and header connect -->
+
+	</div>
+
+	<div id="navSideBar">
+
+		<span class="navs">Home</span> 
+		<span class="navs">Galleries</span> 
+		<span class="navs">Events</span> 
+		<span class="navs">Bla</span> 
+	</div>
+	
+    <div id="viewContainer">
 {% block content %}{% endblock %}
     </div>
 

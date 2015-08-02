@@ -4,7 +4,9 @@
 
              <!-- Core CSS file -->
         <link rel="stylesheet" href="{% static "events/css/photoswipe.css" %}">
-
+        <link rel="stylesheet" href="{% static "events/css/normalize.css" %}">
+    	<link rel="stylesheet" href="{% static "events/css/component.css" %}">
+		<link rel="stylesheet" href="{% static "events/css/demo.css" %}">
         <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
              In the folder of skin CSS file there are also:
              - .png and .svg icons sprite, 
@@ -35,55 +37,35 @@
             
             
     	</div>-->
-        <div class="eventsGallery gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            
-            {%for event in events%}
-            <figure itemprop="associatedMedia" onclick="loadEvent({{ event.id }})" itemscope itemtype="http://schema.org/ImageObject">
+    	 
+       <!-- <div class="gallery" id="eventsGallery" itemscope itemtype="http://schema.org/ImageGallery">
+           
+            <figure itemprop="associatedMedia" onclick="loadEvent('{{ key }}')" itemscope itemtype="http://schema.org/ImageObject">
               <a itemprop="contentUrl" data-size="1024x1024">
-                  <img src="https://farm3.staticflickr.com/2567/5697107145_3c27ff3cd1_m.jpg" itemprop="thumbnail" alt="Image description" />
+                  <img src="{{value.0.thumbnail}}" alt="Image description" />
               </a>
-              <figcaption itemprop="caption description">Image caption  1</figcaption>
-
-          </figure>
+              
+          </figure>-->
+          
+          {%for key,value in events.items%}
+            <section>
+				<figure class="stack stack-spread">
+					<img src="{{value.1.thumbnail}}" alt="img03"/>
+					<img src="{{value.2.thumbnail}}" alt="img02"/>
+					<img src="{{value.3.thumbnail}}" alt="img01"/>
+				</figure>
+			</section>
           {% endfor %}
           
 
 
       </div>
 
-       <div class="photosGallery gallery" style="display:none" itemscope itemtype="http://schema.org/ImageGallery">
-<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-              <a href="https://farm3.staticflickr.com/2567/5697107145_a4c2eaa0cd_o.jpg" itemprop="contentUrl" data-size="1024x1024">
-                  <img src="https://farm3.staticflickr.com/2567/5697107145_3c27ff3cd1_m.jpg" itemprop="thumbnail" alt="Image description" />
-              </a>
-              <figcaption itemprop="caption description">Image caption  1</figcaption>
-
-          </figure>
-
-          <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-              <a href="https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_b.jpg" itemprop="contentUrl" data-size="964x1024">
-                  <img src="https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg" itemprop="thumbnail" alt="Image description" />
-              </a>
-              <figcaption itemprop="caption description">Image caption 2</figcaption>
-          </figure>
-
-<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-              <a href="https://farm6.staticflickr.com/5023/5578283926_822e5e5791_b.jpg" itemprop="contentUrl" data-size="1024x768">
-                  <img src="https://farm6.staticflickr.com/5023/5578283926_822e5e5791_m.jpg" itemprop="thumbnail" alt="Image description" />
-              </a>
-              <figcaption itemprop="caption description">Image caption 4</figcaption>
-          </figure>
-
-          <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-              <a href="https://farm7.staticflickr.com/6175/6176698785_7dee72237e_b.jpg" itemprop="contentUrl" data-size="1024x683">
-                  <img src="https://farm7.staticflickr.com/6175/6176698785_7dee72237e_m.jpg" itemprop="thumbnail" alt="Image description" />
-              </a>
-              <figcaption itemprop="caption description">Image caption 3</figcaption>
-          </figure>
-
-          
-      </div>
-
+       <div class="gallery" id="photosGallery" style="display:none" itemscope itemtype="http://schema.org/ImageGallery">
+</div>
+<button onclick="goBack()">Back</button>
+        
+        
       
 
       <!-- Root element of PhotoSwipe. Must have class pswp. -->
@@ -165,6 +147,10 @@
         <!-- UI JS file -->
         <script src="{% static "events/js/photoswipe-ui-default.min.js" %}"></script>
              <script src="{% static "events/js/events.js"%}"></script>
-
+             <script src="{% static "events/js/classie.js"%}"></script>
+			<script src="{% static "events/js/main.js"%}"></script>
 
     {% endblock %}
+
+    
+    

@@ -1,38 +1,55 @@
 function loadEvent(id){
 	//Put loading symbol
+    //TODO
 
 	//Make ajax request
-	/*$.ajax( "/ASKJOSH" )
-  		.done(function(eventsArray) {
-  		//When ajax request ends- loadPhotos(photos)
+	$.ajax( "http://localhost:8000/event_detail?id="+id)
+  		.success(function(eventsArray) {
+  		    //When ajax request ends- loadPhotos(photos)
     		loadPhotos(eventsArray);
+            $("#photosGallery").show();
+
+
+            initPhotoSwipeFromDOM('#photosGallery');    
+
   		})
-   .fail(function() {
-    console.log("Error");
-  });*/
-alert(id);
-	
+        .fail(function() {
+            console.log("Error");
+        });
+
+
+
 
 }
 function loadPhotos(photos){
 	//Throw away the events except the one we loaded - (keep them)
+	$("#eventsGallery").hide();
+	
+	$(".eventPhotoElement").remove();
 
 	//create elements for images underneat main
-
+	for(var i = 0; i < photos.length; i++){
+		$( "#photosGallery" ).append( getPhotoElement(photos[i].thumbnail, photos[i].username, photos[i].full_res));
+	}
+	$("#photosGallery").show();
 	//animate these images
 
 	//Back button element unhide
 
+	initPhotoSwipeFromDOM('#photosGallery');	
 }
 
 function goBack(){
+	$("#photosGallery").hide();
 	//Make photosgo back into event
-
+	$("#eventsGallery").show();
 	//Load back events
 }
 
 
-
+function getPhotoElement(thumbnailurl, caption, fullimage){
+	return '<figure fullimageurl="'+fullimage+'" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
+}
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
@@ -47,7 +64,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             size,
             item;
 
-        for(var i = 0; i < numNodes; i++) {
+        for(var i = 1; i < numNodes; i++) {
 
             figureEl = thumbElements[i]; // <figure> element
 
@@ -62,7 +79,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             // create slide object
             item = {
-                src: linkEl.getAttribute('href'),
+                src: figureEl.getAttribute("fullimageurhl"),
                 w: parseInt(size[0], 10),
                 h: parseInt(size[1], 10)
             };
@@ -76,13 +93,13 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             if(linkEl.children.length > 0) {
                 // <img> thumbnail element, retrieving thumbnail url
-                item.msrc = linkEl.children[0].getAttribute('src');
+                item.src = linkEl.children[0].getAttribute('src');
             } 
 
             item.el = figureEl; // save link to element for getThumbBoundsFn
             items.push(item);
         }
-
+        console.log(items);
         return items;
     };
 
@@ -237,5 +254,3 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     }
 };
 
-// execute above function
-initPhotoSwipeFromDOM('.my-gallery');

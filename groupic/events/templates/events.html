@@ -51,13 +51,18 @@
           </figure>-->
           
           {%for key,value in events.items%}
+
+        
             <section class="eventsGallery">
-				<figure class="stack stack-spread" onclick="loadEvent('{{ key }}')">
-					<img src="{{value.14.thumbnail}}" alt="img03"/>
-					<img src="{{value.24.thumbnail}}" alt="img02"/>
-					<img src="{{value.34.thumbnail}}" alt="img01"/>
-				</figure>
-			</section>
+              <div id="gallery-container">
+              <h3>{{ key }}</h3>
+    				<figure class="stack stack-spread" onclick="loadEvent('{{ key }}')">
+    					<img src="{{value.14.thumbnail}}" alt="img03"/>
+    					<img src="{{value.24.thumbnail}}" alt="img02"/>
+    					<img src="{{value.34.thumbnail}}" alt="img01"/>
+    				</figure>
+        </div>
+    			</section>
           {% endfor %}
           
 

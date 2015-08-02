@@ -139,10 +139,6 @@ section {
 	text-align: center;
 }
 
-section:nth-child(odd){
-	background: rgba(0,0,0,0.08);
-}
-
 .codrops-header + section {
 	padding-top: 2em;
 }

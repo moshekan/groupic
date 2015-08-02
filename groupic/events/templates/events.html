@@ -4,7 +4,9 @@
 
              <!-- Core CSS file -->
         <link rel="stylesheet" href="{% static "events/css/photoswipe.css" %}">
-
+        <link rel="stylesheet" href="{% static "events/css/normalize.css" %}">
+    	<link rel="stylesheet" href="{% static "events/css/component.css" %}">
+		<link rel="stylesheet" href="{% static "events/css/demo.css" %}">
         <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
              In the folder of skin CSS file there are also:
              - .png and .svg icons sprite, 
@@ -35,14 +37,24 @@
             
             
     	</div>-->
-        <div class="gallery" id="eventsGallery" itemscope itemtype="http://schema.org/ImageGallery">
-            {%for key,value in events.items%}
+    	 
+       <!-- <div class="gallery" id="eventsGallery" itemscope itemtype="http://schema.org/ImageGallery">
+           
             <figure itemprop="associatedMedia" onclick="loadEvent('{{ key }}')" itemscope itemtype="http://schema.org/ImageObject">
               <a itemprop="contentUrl" data-size="1024x1024">
                   <img src="{{value.0.thumbnail}}" alt="Image description" />
               </a>
               
-          </figure>
+          </figure>-->
+          
+          {%for key,value in events.items%}
+            <section>
+				<figure class="stack stack-spread">
+					<img src="{{value.1.thumbnail}}" alt="img03"/>
+					<img src="{{value.2.thumbnail}}" alt="img02"/>
+					<img src="{{value.3.thumbnail}}" alt="img01"/>
+				</figure>
+			</section>
           {% endfor %}
           
 
@@ -135,7 +147,8 @@
         <!-- UI JS file -->
         <script src="{% static "events/js/photoswipe-ui-default.min.js" %}"></script>
              <script src="{% static "events/js/events.js"%}"></script>
-
+             <script src="{% static "events/js/classie.js"%}"></script>
+			<script src="{% static "events/js/main.js"%}"></script>
 
     {% endblock %}
 

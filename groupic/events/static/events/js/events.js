@@ -2,37 +2,80 @@ function loadEvent(id){
 	//Put loading symbol
 
 	//Make ajax request
-	/*$.ajax( "/ASKJOSH" )
+	$.ajax( "http://google.com" )
   		.done(function(eventsArray) {
   		//When ajax request ends- loadPhotos(photos)
     		loadPhotos(eventsArray);
   		})
    .fail(function() {
     console.log("Error");
-  });*/
-alert(id);
-	
+  });
+var photos = [
+{
+	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
+	authorName: "Maor Kern"
+},
+{
+	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
+	authorName: "Nadav Kern"
+},
+{
+	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
+	authorName: "Tamar Kern"
+},
+{
+	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
+	authorName: "Eli Kern"
+},
+{
+	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
+	authorName: "Moshe Kern"
+},
+{
+	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
+	authorName: "T Kern"
+}
+
+
+]
+
+loadPhotos(photos);
+
+$("#photosGallery").show();
+
+
+initPhotoSwipeFromDOM('#photosGallery');	
 
 }
 function loadPhotos(photos){
 	//Throw away the events except the one we loaded - (keep them)
+	$("#eventsGallery").hide();
+	
+	$(".eventPhotoElement").remove();
 
 	//create elements for images underneat main
-
+	for(var i = 0; i < photos.length; i++){
+		$( "#photosGallery" ).append( getPhotoElement(photos[i].imageLink, photos[i].authorName));
+	}
+	$("#photosGallery").show();
 	//animate these images
 
 	//Back button element unhide
 
+	initPhotoSwipeFromDOM('#photosGallery');	
 }
 
 function goBack(){
+	$("#photosGallery").hide();
 	//Make photosgo back into event
-
+	$("#eventsGallery").show();
 	//Load back events
 }
 
 
-
+function getPhotoElement(imageurl, caption){
+	return '<figure class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img src="'+imageurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
+}
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
@@ -47,7 +90,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             size,
             item;
 
-        for(var i = 0; i < numNodes; i++) {
+        for(var i = 1; i < numNodes; i++) {
 
             figureEl = thumbElements[i]; // <figure> element
 
@@ -76,13 +119,13 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             if(linkEl.children.length > 0) {
                 // <img> thumbnail element, retrieving thumbnail url
-                item.msrc = linkEl.children[0].getAttribute('src');
+                item.src = linkEl.children[0].getAttribute('src');
             } 
 
             item.el = figureEl; // save link to element for getThumbBoundsFn
             items.push(item);
         }
-
+        console.log(items);
         return items;
     };
 
@@ -237,5 +280,3 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     }
 };
 
-// execute above function
-initPhotoSwipeFromDOM('.my-gallery');

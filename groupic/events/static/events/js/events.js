@@ -11,6 +11,8 @@ function loadEvent(id){
 
 
             initPhotoSwipeFromDOM('#photosGallery');    
+                $(".backbtn").show();
+
 
   		})
         .fail(function() {
@@ -44,6 +46,7 @@ function goBack(){
 	//Make photosgo back into event
 	$("#eventsGallery").show();
 	//Load back events
+    $(".backbtn").hide();
 }
 
 
@@ -79,7 +82,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             // create slide object
             item = {
-                src: figureEl.getAttribute("fullimageurhl"),
+                src: figureEl.getAttribute("fullimageurl"),
                 w: parseInt(size[0], 10),
                 h: parseInt(size[1], 10)
             };
@@ -255,6 +258,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 };
 
 $(document).ready(function() {
+    $('.backbtn').hide();
     var sideBarOpen = false;
     $("#navSideBar").click(function() {
         if (!sideBarOpen) {

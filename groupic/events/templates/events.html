@@ -13,8 +13,11 @@
              - preloader.gif (for browsers that do not support CSS animations) -->
         <link rel="stylesheet" href="{% static "events/default-skin/default-skin.css" %}">
 
-     <link rel="stylesheet" href="{% static "events/css/main.css"%}">
 
+{% endblock %}
+
+{% block header%}
+<button class="backbtn" onclick="goBack()">Back</button>
 {% endblock %}
 
 {% block content %}
@@ -63,7 +66,7 @@
 
        <div class="gallery" id="photosGallery" style="display:none" itemscope itemtype="http://schema.org/ImageGallery">
 </div>
-<button onclick="goBack()">Back</button>
+
         
         
       

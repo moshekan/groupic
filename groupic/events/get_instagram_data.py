@@ -2,6 +2,7 @@ from instagram.client import InstagramAPI
 import json
 import datetime
 from geopy.geocoders import Nominatim
+from collections import Counter
 
 DISTANCE = 5000
 
@@ -15,7 +16,7 @@ RAMALLAH = (31.898043, 35.204271)
 EVENTS = {
 'gaza-war-2015': {'tags': {'gaza','gaza4life','gazawillbefree','gazaunderattack'},
 		'locations': [GAZA, JERUSALEM, RAMALLAH]
-		}
+		},
 'olympics-summer-2012': {'tags': {'olympics', 'olympics2012', 'olympicsherewecome'}, 
 		'locations': [LONDON]
 		}
@@ -140,6 +141,24 @@ def get_events():
 def write_to_file(filename, events):
     with open(filename, 'w') as f:
         f.write(json.dumps(byteify(events)))
+
+def read_from_file(filename):
+	with open(filename) as f:
+    		return json.loads(f.read())
+def get_tags_counter(events):
+	all_tags = {}
+
+	for event_name, media in events.iteritems():
+		tags = []
+		for m in media:
+			tags.extend(m['tags'])
+		all_tags[event_name] = Counter(tags)
+	return all_tags
+		
+def print_most_common_tags(counters, top_count=10):
+	for event_name, counter in counters.iteritems():
+		for tag, count in counter.most_common(top_count):
+			print "%s\t%s" % (tag, count)
 
 if __name__ == "__main__":
     events = get_events()

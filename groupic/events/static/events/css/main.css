@@ -2,10 +2,16 @@
 	position: absolute;
 	top: 15px;
 }
+.gallery{
+  text-align: center;
+  padding-top: 94px;
+
+}
 
 .gallery img {
-  width: 100%;
+  width: 90%;
   height: auto;
+
 }
 
 .gallery figure {
@@ -74,7 +80,7 @@ body {
   z-index: 150;
   left: -130px;
   padding-top: 50px;
-  background-color: rgba(200, 223, 255, 0.25);
+  background-color: #f2f7ff;
   width: 150px;
   margin-top: 94px;
   height: calc(100% - 94px);

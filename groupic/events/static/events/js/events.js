@@ -25,7 +25,7 @@ function loadEvent(id){
 }
 function loadPhotos(photos){
 	//Throw away the events except the one we loaded - (keep them)
-	$("#eventsGallery").hide();
+	$(".eventsGallery").hide();
 	
 	$(".eventPhotoElement").remove();
 
@@ -44,7 +44,7 @@ function loadPhotos(photos){
 function goBack(){
 	$("#photosGallery").hide();
 	//Make photosgo back into event
-	$("#eventsGallery").show();
+	$(".eventsGallery").show();
 	//Load back events
     $(".backbtn").hide();
 }

@@ -41,7 +41,7 @@
             
     	</div>-->
     	 
-       <!-- <div class="gallery" id="eventsGallery" itemscope itemtype="http://schema.org/ImageGallery">
+       <!-- <div class="gallery eventsGallery" itemscope itemtype="http://schema.org/ImageGallery">
            
             <figure itemprop="associatedMedia" onclick="loadEvent('{{ key }}')" itemscope itemtype="http://schema.org/ImageObject">
               <a itemprop="contentUrl" data-size="1024x1024">
@@ -51,7 +51,7 @@
           </figure>-->
           
           {%for key,value in events.items%}
-            <section id="eventsGallery">
+            <section class="eventsGallery">
 				<figure class="stack stack-spread" onclick="loadEvent('{{ key }}')">
 					<img src="{{value.14.thumbnail}}" alt="img03"/>
 					<img src="{{value.24.thumbnail}}" alt="img02"/>

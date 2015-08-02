@@ -1,50 +1,24 @@
 function loadEvent(id){
 	//Put loading symbol
+    //TODO
 
 	//Make ajax request
-	$.ajax( "http://google.com" )
-  		.done(function(eventsArray) {
-  		//When ajax request ends- loadPhotos(photos)
+	$.ajax( "http://localhost:8000/event_detail?id="+id)
+  		.success(function(eventsArray) {
+  		    //When ajax request ends- loadPhotos(photos)
     		loadPhotos(eventsArray);
+            $("#photosGallery").show();
+
+
+            initPhotoSwipeFromDOM('#photosGallery');    
+
   		})
-   .fail(function() {
-    console.log("Error");
-  });
-var photos = [
-{
-	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
-	authorName: "Maor Kern"
-},
-{
-	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
-	authorName: "Nadav Kern"
-},
-{
-	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
-	authorName: "Tamar Kern"
-},
-{
-	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
-	authorName: "Eli Kern"
-},
-{
-	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
-	authorName: "Moshe Kern"
-},
-{
-	imageLink: "https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_m.jpg",
-	authorName: "T Kern"
-}
+        .fail(function() {
+            console.log("Error");
+        });
 
 
-]
 
-loadPhotos(photos);
-
-$("#photosGallery").show();
-
-
-initPhotoSwipeFromDOM('#photosGallery');	
 
 }
 function loadPhotos(photos){
@@ -55,7 +29,7 @@ function loadPhotos(photos){
 
 	//create elements for images underneat main
 	for(var i = 0; i < photos.length; i++){
-		$( "#photosGallery" ).append( getPhotoElement(photos[i].imageLink, photos[i].authorName));
+		$( "#photosGallery" ).append( getPhotoElement(photos[i].thumbnail, photos[i].username, photos[i].full_res));
 	}
 	$("#photosGallery").show();
 	//animate these images
@@ -73,8 +47,8 @@ function goBack(){
 }
 
 
-function getPhotoElement(imageurl, caption){
-	return '<figure class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img src="'+imageurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
+function getPhotoElement(thumbnailurl, caption, fullimage){
+	return '<figure fullimageurl="'+fullimage+'" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
 }
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {
@@ -105,7 +79,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             // create slide object
             item = {
-                src: linkEl.getAttribute('href'),
+                src: figureEl.getAttribute("fullimageurhl"),
                 w: parseInt(size[0], 10),
                 h: parseInt(size[1], 10)
             };

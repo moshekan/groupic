@@ -10,7 +10,7 @@ FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
 # Create your views here.
 @render_to('events.html')
 def index(request):
-	context = {"events" : [{"id":1, "eventName":"Maor"},{"id":2,"eventName":"Nadav"},{"id":3,"eventName":"Tamar"}]}
+	context = {"events" : get_json_data(FILENAME)}
 	return context
 
 

@@ -6,7 +6,7 @@ from collections import Counter
 
 DISTANCE = 5000
 
-
+RIO = (-22.906847, -43.172896)
 LONDON = (51.507351, -0.127758)
 GAZA = (31.354676, 34.308826)
 JERUSALEM = (31.768319, 35.213710)
@@ -19,7 +19,10 @@ EVENTS = {
 		},
 'olympics-summer-2012': {'tags': {'olympics', 'olympics2012', 'olympicsherewecome'}, 
 		'locations': [LONDON]
-		}
+		},
+'fifa-world-cup-2014': {'tags': {'fifaworldcup', 'worldcup', 'fifaworldcup2014', 'fifaworldclupbrasil2014'},
+			'locations': [RIO]
+			}
 }
 
 FILENAME="events.json"

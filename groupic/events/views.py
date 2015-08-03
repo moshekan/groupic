@@ -10,6 +10,14 @@ FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
 def landing(request):
 	return {}
 
+@render_to('features.html')
+def features(request):
+	return {}
+
+@render_to('contact_us.html')
+def contact_us(request):
+	return {}
+
 @render_to('events.html')
 def index(request):
 	context = {"events" : get_json_data(FILENAME)}

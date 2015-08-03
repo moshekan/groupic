@@ -8,19 +8,24 @@ FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
 
 @render_to('landing.html')
 def landing(request):
-	return {}
+	return {'nav_home': 'active'}
 
 @render_to('features.html')
 def features(request):
-	return {}
+	return {'nav_features':'active'}
 
 @render_to('contact_us.html')
 def contact_us(request):
-	return {}
+	return {'nav_contact':'active'}
+
+@render_to('about_us.html')
+def about_us(request):
+	return {'nav_contact':'active'}
 
 @render_to('events.html')
 def index(request):
-	context = {"events" : get_json_data(FILENAME)}
+	context = {"events" : get_json_data(FILENAME),
+	'nav_home':'active'}
 	return context
 
 

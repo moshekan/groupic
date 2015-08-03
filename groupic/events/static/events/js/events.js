@@ -52,7 +52,7 @@ function goBack(){
 
 
 function getPhotoElement(thumbnailurl, caption, fullimage){
-	return '<figure fullimageurl="'+fullimage+'" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
+	return '<figure id="arrange" fullimageurl="'+fullimage+'" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
 }
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {

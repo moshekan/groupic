@@ -1,4 +1,5 @@
 function loadEvent(id){
+    console.log("Load Events " + id);
 	//Put loading symbol
     //TODO
 
@@ -11,6 +12,8 @@ function loadEvent(id){
 
 
             initPhotoSwipeFromDOM('#photosGallery');    
+            $(".backbtn").show();
+
 
   		})
         .fail(function() {
@@ -42,8 +45,9 @@ function loadPhotos(photos){
 function goBack(){
 	$("#photosGallery").hide();
 	//Make photosgo back into event
-	$("#eventsGallery").show();
+	$(".eventsGallery").show();
 	//Load back events
+    $(".backbtn").hide();
 }
 
 
@@ -79,7 +83,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             // create slide object
             item = {
-                src: figureEl.getAttribute("fullimageurhl"),
+                src: figureEl.getAttribute("fullimageurl"),
                 w: parseInt(size[0], 10),
                 h: parseInt(size[1], 10)
             };
@@ -254,3 +258,39 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     }
 };
 
+$(document).ready(function() {
+    $('.backbtn').hide();
+    var sideBarOpen = false;
+    $("#navSideBar").click(function() {
+        if (!sideBarOpen) {
+            $("#navSideBar").animate({
+                left : "0px"
+            }, 500);
+            $("#hotfix2").animate({
+                left : "0px"
+            }, 500);
+            sideBarOpen = true;
+            $(".navs").css({
+                display : "block"
+            });
+        }else {
+            $("#navSideBar").animate({
+                left : "-130px"
+            }, 500);
+            $("#hotfix2").animate({
+                left : "-130px"
+            }, 500);
+            sideBarOpen = false;
+            setTimeout(function (){
+                $(".navs").css({
+                    display : "none"
+                });
+            }, 500);
+            
+        }
+    });
+    $(".click").click(function() {
+        var id = $(this).attr("id");
+        loadEvent(id);
+    });
+});

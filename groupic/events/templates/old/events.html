@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block styles %}
+
+             <!-- Core CSS file -->
+        <link rel="stylesheet" href="{% static "events/css/photoswipe.css" %}">
+        <link rel="stylesheet" href="{% static "events/css/normalize.css" %}">
+    	<link rel="stylesheet" href="{% static "events/css/component.css" %}">
+		<link rel="stylesheet" href="{% static "events/css/demo.css" %}">
+        <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
+             In the folder of skin CSS file there are also:
+             - .png and .svg icons sprite, 
+             - preloader.gif (for browsers that do not support CSS animations) -->
+        <link rel="stylesheet" href="{% static "events/default-skin/default-skin.css" %}">
+
+
+{% endblock %}
+
+{% block header%}
+<button class="backbtn" onclick="goBack()">Back</button>
+{% endblock %}
+
+{% block content %}
+<!--<div class="row">
+    		<div  class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#">
+                	<span style="position:absolute; top:15px;">Name</span>
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+
+            {%for event in events%}
+                <div  class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#">
+                    <span class="eventName">{{event.eventName}}</span>
+                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            {% endfor %}
+            
+            
+    	</div>-->
+    	 
+       <!-- <div class="gallery eventsGallery" itemscope itemtype="http://schema.org/ImageGallery">
+           
+            <figure itemprop="associatedMedia" onclick="loadEvent('{{ key }}')" itemscope itemtype="http://schema.org/ImageObject">
+              <a itemprop="contentUrl" data-size="1024x1024">
+                  <img src="{{value.0.thumbnail}}" alt="Image description" />
+              </a>
+              
+          </figure>-->
+          
+          {%for key,value in events.items%}
+
+        
+            <section class="eventsGallery">
+              <div id="gallery-container">
+              <h3>{{ key }}</h3>
+    				<figure class="stack stack-spread" onclick="loadEvent('{{ key }}')">
+    					<img src="{{value.14.thumbnail}}" alt="img03"/>
+    					<img src="{{value.24.thumbnail}}" alt="img02"/>
+    					<img src="{{value.34.thumbnail}}" alt="img01"/>
+    				</figure>
+        </div>
+    			</section>
+          {% endfor %}
+          
+
+
+      </div>
+
+       <div class="gallery" id="photosGallery" style="display:none" itemscope itemtype="http://schema.org/ImageGallery">
+</div>
+
+        
+        
+      
+
+      <!-- Root element of PhotoSwipe. Must have class pswp. -->
+      <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+    It's a separate element, as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+        <!-- don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+            <div class="pswp__share-tooltip"></div> 
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+        </button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+        </button>
+
+        <div class="pswp__caption">
+            <div class="pswp__caption__center"></div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+
+</div>
+{% endblock %}
+        {% block scripts %}
+        <!-- Core JS file -->
+        <script src="{% static "events/js/photoswipe.min.js" %}"></script>
+
+        <!-- UI JS file -->
+        <script src="{% static "events/js/photoswipe-ui-default.min.js" %}"></script>
+             <script src="{% static "events/js/events.js"%}"></script>
+             <script src="{% static "events/js/classie.js"%}"></script>
+			<script src="{% static "events/js/main.js"%}"></script>
+
+    {% endblock %}
+    
+    
+
+    
+    

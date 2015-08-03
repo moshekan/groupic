@@ -2,11 +2,18 @@
 	position: absolute;
 	top: 15px;
 }
+.gallery{
+  text-align: center;
+  padding-top: 94px;
+
+}
 
 .gallery img {
-  width: 100%;
+  width: 90%;
   height: auto;
+
 }
+
 
 .gallery figure {
   display: inline-block;
@@ -32,17 +39,28 @@ body {
 
 #header {
   position: fixed;
+  top: 0;
   text-align: center;
   background-color: rgba(200, 223, 255, 0.25);
   box-shadow: 0px 1.5px 7px rgba(0, 0, 0, 0.2);
   padding: 7px;
   width: 100%;
   display: block;
-  z-index: 200;
+  z-index: 600;
+}
+#footer {
+  text-align: center;
+  background-color: rgba(200, 223, 255, 0.25);
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
 }
 
 #hotFix {
   position: fixed;
+  top: 0px;
   background-color: white;
   width: 100%;
   height: 94px;
@@ -52,44 +70,53 @@ body {
 
 #hotFix2 {
   position: fixed;
-  top: 90px;
+  top: 94px;
   width: 150px;
   height: 20px;
   background-color: #f2f7ff;
   z-index: 300;
+  left: -130px;
 }
 
 #navSideBar {
   position: fixed;
+  z-index: 150;
+  left: -130px;
   padding-top: 50px;
-  background-color: rgba(200, 223, 255, 0.25);
+  background-color: #f2f7ff;
   width: 150px;
   margin-top: 94px;
-  height: calc(100% - 144px);
+  height: calc(100% - 94px);
   box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.2);
 }
 
 #navSideBar .navs {
-  display: block;
   height: auto;
   padding-top: 15px;
   padding-bottom: 15px;
-  transition: .5s;
+  transition: .25s;
   padding-left: 40px;
   cursor: pointer;
+  font-size: 20px;
+  display: none;
 }
 
 #navSideBar .navs:hover {
   background-color: rgba(210, 233, 255, 0.7);
   padding-left: 50px;
   color: #555;
+  cursor: pointer;
 }
 
 #viewContainer {
   position: absolute;
-  top: 94px;
-  left: 150px;
+  top: 114px;
+  left: 20px;
   height: auto;
-  width: calc(100% - 150px);
+  width: calc(100% - 40px);
   text-align: center;
+}
+
+#gallery-container {
+  display: inline-block;
 }

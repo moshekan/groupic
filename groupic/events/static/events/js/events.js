@@ -5,9 +5,9 @@ function loadEvent(id){
 
 	//Make ajax request
 	$.ajax( "/event_detail?id="+id)
-  		.success(function(eventsArray) {
+  		.success(function(eventOb) {
   		    //When ajax request ends- loadPhotos(photos)
-    		loadPhotos(eventsArray);
+    		loadPhotos(eventOb.media);
             $("#photosGallery").show();
 
 

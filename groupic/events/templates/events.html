@@ -24,7 +24,7 @@
                             </span>
                         </span>
                         <a ><img onclick="loadEvent('{{ key }}')" src="{{value.media.0.thumbnail}}" class="gallery-top" alt="{{key}}"></a>
-                        <span class="project-details"><a href="gallery-single.htm">{{key}}</a>For an international ad campaign.</span>
+                        <span class="project-details"><a href="gallery-single.htm">{{value.name}}</a><b>{{value.media|length}}</b> Pictures of {{value.name}}</span>
                     </li>
                 </div>
                      {% endfor %}

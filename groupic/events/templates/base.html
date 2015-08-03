@@ -34,7 +34,7 @@
         <!-- Logo
         ================================================== -->
         <div class="span4 logo">
-        	<a href="index.html"><img src="{% static "events/images/logov2.gif" %}" alt="" /></a>
+        	<a href="/"><img src="{% static "events/images/logov2.gif" %}" alt="" /></a>
         </div>
         
         <!-- Main Navigation
@@ -43,15 +43,11 @@
             <div class="navbar hidden-phone">
             
             <ul class="nav">
-            <li class="dropdown active">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="index.html">Home <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="index.html">Full Page</a></li>
-                    <li><a href="index-gallery.html">Gallery Only</a></li>
-                    <li><a href="index-slider.html">Slider Only</a></li>
-                </ul>
-            </li>
-           <li><a href="features.html">Features</a></li>
+           <li id ="home" class="{{ nav_home }}"><a href="/">Home</a></li>
+           <li id ="features" class="{{ nav_features }}">
+            <a href="features">Features</a>
+           </li>
+           <!--
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="page-full-width.html">Pages <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -60,28 +56,8 @@
                     <li><a href="page-left-sidebar.html">Left Sidebar</a></li>
                     <li><a href="page-double-sidebar.html">Double Sidebar</a></li>
                 </ul>
-            </li>
-             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="gallery-4col.html">Gallery <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="gallery-3col.html">Gallery 3 Column</a></li>
-                    <li><a href="gallery-4col.html">Gallery 4 Column</a></li>
-                    <li><a href="gallery-6col.html">Gallery 6 Column</a></li>
-                    <li><a href="gallery-4col-circle.html">Gallery 4 Round</a></li>
-                    <li><a href="gallery-single.html">Gallery Single</a></li>
-                </ul>
-             </li>
-             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="blog-style1.html">Blog <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="blog-style1.html">Blog Style 1</a></li>
-                    <li><a href="blog-style2.html">Blog Style 2</a></li>
-                    <li><a href="blog-style3.html">Blog Style 3</a></li>
-                    <li><a href="blog-style4.html">Blog Style 4</a></li>
-                    <li><a href="blog-single.html">Blog Single</a></li>
-                </ul>
-             </li>
-             <li><a href="page-contact.html">Contact</a></li>
+            </li>-->
+             <li id ="contact_us" class="{{ nav_contact }}"> <a href="contact_us">Contact</a></li>
             </ul>
            
             </div>
@@ -120,8 +96,13 @@
                 </form>
 
         </div>
+        <hr>
+
+
         
-      </div><!-- End Header -->
+      </div>
+      <hr>
+<!-- End Header -->
      
       {% block content %}
       {% endblock %}

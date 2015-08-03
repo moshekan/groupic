@@ -1,1 +1,1 @@
-web: gunicorn groupic.wsgi:application
+web: cd groupic; gunicorn groupic.wsgi:application

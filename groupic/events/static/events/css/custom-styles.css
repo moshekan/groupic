@@ -11,6 +11,11 @@ body {background: #f9f9f9 url(../images/page-bg-1.jpg);}
 	min-height: 100%;
 }
 
+.footer-logo{
+	width: 116px;
+	height: 40px;
+}
+
 @media (max-width: 767px) {
   body { padding-right: 0px; padding-left: 0px; }
   .container {margin-right: 20px; margin-left: 20px;}

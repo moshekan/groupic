@@ -4,8 +4,9 @@ import datetime
 from geopy.geocoders import Nominatim
 from collections import Counter
 
-DISTANCE = 5000
+DISTANCE = 2500
 
+TEL_AVIV = (32.085300, 34.781768)
 RIO = (-22.906847, -43.172896)
 LONDON = (51.507351, -0.127758)
 GAZA = (31.354676, 34.308826)
@@ -15,20 +16,28 @@ RAMALLAH = (31.898043, 35.204271)
 
 EVENTS = {
 'gaza-war-2015': {'tags': {'gaza','gaza4life','gazawillbefree','gazaunderattack'},
-		'locations': [GAZA, JERUSALEM, RAMALLAH]
+		'locations': [GAZA, JERUSALEM, RAMALLAH],
+		'name': "Gaza War 2015"
 		},
 'olympics-summer-2012': {'tags': {'olympics', 'olympics2012', 'olympicsherewecome'}, 
-		'locations': [LONDON]
+		'locations': [LONDON],
+		'name': "The Olympic Games 2012"
 		},
 'fifa-world-cup-2014': {'tags': {'fifaworldcup', 'worldcup', 'fifaworldcup2014', 'fifaworldclupbrasil2014'},
-			'locations': [RIO]
-			}
+			'locations': [RIO],
+			'name': "Fifa World Cup"
+			},
+'gay-pride-israel-2015': {'tags': {'gay', 'gaypride', 'gayprideisrael', 'israel', 'israelgayparade', 'gayprideparade', 'gaypride2015', 'gayparade2015', 'gayprideisrael'}, 		
+			'locations': [TEL_AVIV],
+		'name': "Gay Pride 2015",
+		}
+		
 }
 
 FILENAME="events.json"
 ACCESS_TOKEN = "2047500927.3561200.794e724d28454fb19b92f10fbd11b90f"
 CLIENT_SECRET = "07eba75913484e75bf71a12e8a5932ce"
-LIKE_COUNT = 1
+LIKE_COUNT = 5
 MEDIA_LIMIT = 50
 PAGE_LIMIT = 5
 
@@ -102,7 +111,7 @@ def media_as_dict(media_list):
 
     
 
-def get_pics_for_event(api, event):
+def get_event_dict(api, event):
     locations = event['locations']
     tags = event['tags']
     print "#1. get locations"
@@ -129,7 +138,8 @@ def get_pics_for_event(api, event):
     
     print "Total media count:", len(media_list)
     print '#5. extract json'
-    return media_as_dict(media_list)
+    return {'media' : media_as_dict(media_list),
+	    'name' : event['name']}
 
 
         
@@ -138,7 +148,7 @@ def get_events():
     events = {}
     for event_name, event in EVENTS.iteritems():
         print "Searching event:", event_name
-        events[event_name]=get_pics_for_event(api, event)
+        events[event_name]=get_event_dict(api, event)
     return events
 
 def write_to_file(filename, events):

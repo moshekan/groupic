@@ -1,166 +1,153 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block styles %}
-
-             <!-- Core CSS file -->
-        <link rel="stylesheet" href="{% static "events/css/photoswipe.css" %}">
-        <link rel="stylesheet" href="{% static "events/css/normalize.css" %}">
-    	<link rel="stylesheet" href="{% static "events/css/component.css" %}">
-		<link rel="stylesheet" href="{% static "events/css/demo.css" %}">
-        <!-- Skin CSS file (styling of UI - buttons, caption, etc.)
-             In the folder of skin CSS file there are also:
-             - .png and .svg icons sprite, 
-             - preloader.gif (for browsers that do not support CSS animations) -->
-        <link rel="stylesheet" href="{% static "events/default-skin/default-skin.css" %}">
-
-
-{% endblock %}
-
-{% block header%}
-<button class="backbtn" onclick="goBack()">Back</button>
-{% endblock %}
+{% block title %} Groupic - Latest event {% endblock %}
 
 {% block content %}
-<!--<div class="row">
-    		<div  class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                	<span style="position:absolute; top:15px;">Name</span>
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-
-            {%for event in events%}
-                <div  class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <span class="eventName">{{event.eventName}}</span>
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            {% endfor %}
-            
-            
-    	</div>-->
-    	 
-       <!-- <div class="gallery eventsGallery" itemscope itemtype="http://schema.org/ImageGallery">
-           
-            <figure itemprop="associatedMedia" onclick="loadEvent('{{ key }}')" itemscope itemtype="http://schema.org/ImageObject">
-              <a itemprop="contentUrl" data-size="1024x1024">
-                  <img src="{{value.0.thumbnail}}" alt="Image description" />
-              </a>
-              
-          </figure>-->
-          
-          {%for key,value in events.items%}
-
-        
-            <section class="eventsGallery">
-              <div id="gallery-container">
-              <h3>{{ key }}</h3>
-    				<figure class="stack stack-spread" onclick="loadEvent('{{ key }}')">
-    					<img src="{{value.14.thumbnail}}" alt="img03"/>
-    					<img src="{{value.24.thumbnail}}" alt="img02"/>
-    					<img src="{{value.34.thumbnail}}" alt="img01"/>
-    				</figure>
-        </div>
-    			</section>
-          {% endfor %}
-          
-
-
-      </div>
-
-       <div class="gallery" id="photosGallery" style="display:none" itemscope itemtype="http://schema.org/ImageGallery">
-</div>
-
-        
-        
+    
+    <div class="row gallery-row"><!-- Begin Gallery Row --> 
       
+    	<div class="span12">
+    	
+        <!-- Gallery Thumbnails
+        ================================================== -->
 
-      <!-- Root element of PhotoSwipe. Must have class pswp. -->
-      <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-    It's a separate element, as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
-        <!-- don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                    </div>
+            <div id="eventsGallery" class="row clearfix no-margin">
+            <ul class="gallery-post-grid holder">
+                
+                    {%for key,value in events.items%}
+                    <div id="{{key}}" class="click">
+                        <li  class="span3 gallery-item" data-id="id-{{ forloop.counter }}" data-type="illustration">
+                        <span  class="gallery-hover-4col hidden-phone hidden-tablet">
+                            <span class="gallery-icons">
+                                <a href="{% static "events/images/gallery/gallery-img-1-full.jpg" %}" class="item-zoom-link lightbox" title="{{key}}" data-rel="prettyPhoto"></a>
+                                <a href="gallery-single.htm" class="item-details-link"></a>
+                            </span>
+                        </span>
+                        <a href="gallery-single.htm"><img onclick="loadEvent('{{ key }}')" src="{{value.14.full_res}}" class="gallery-top" alt="{{key}}"></a>
+                        <span class="project-details"><a href="gallery-single.htm">{{key}}</a>For an international ad campaign.</span>
+                    </li>
                 </div>
+                     {% endfor %}
+
+                     <div class="gallery" id="photosGallery" style="display:none" itemscope itemtype="http://schema.org/ImageGallery">
+                        
+</div>
+                
+                    <!-- Gallery Item 1 -->
+   
+
+    </div><!-- End Gallery Row -->
+    
+    <div class="row"><!-- Begin Bottom Section -->
+    
+    	<!-- Blog Preview
+        ================================================== -->
+    	<div class="span6">
+
+            <h5 class="title-bg">From the Blog 
+                <small>All the latest news</small>
+                <button id="btn-blog-next" class="btn btn-inverse btn-mini" type="button">&raquo;</button>
+                <button id="btn-blog-prev" class="btn btn-inverse btn-mini" type="button">&laquo;</button>
+            </h5>
+
+        <div id="blogCarousel" class="carousel slide ">
+
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+
+                <!-- Blog Item 1 -->
+                <div class="active item">
+                    <a href="blog-single.htm"><img src="{% static "events/images/gallery/blog-med-img-1.jpg" %}" alt="" class="align-left blog-thumb-preview" /></a>
+                    <div class="post-info clearfix">
+                        <h4><a href="blog-single.htm">A subject that is beautiful in itself</a></h4>
+                        <ul class="blog-details-preview">
+                            <li><i class="icon-calendar"></i><strong>Posted on:</strong> Sept 4, 2015<li>
+                            <li><i class="icon-user"></i><strong>Posted by:</strong> <a href="#" title="Link">Admin</a><li>
+                            <li><i class="icon-comment"></i><strong>Comments:</strong> <a href="#" title="Link">12</a><li>
+                            <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a>, <a href="#">illustration</a>
+                        </ul>
+                    </div>
+                    <p class="blog-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Vestibulum lectus tellus, aliquet et iaculis sed, volutpat vel erat. <a href="#">Read more</a><p>
+                </div>
+
+                <!-- Blog Item 2 -->
+                 <div class="item">
+                    <a href="blog-single.htm"><img src="{% static "events/images/gallery/blog-med-img-1.jpg" %}" alt="" class="align-left blog-thumb-preview" /></a>
+                    <div class="post-info clearfix">
+                        <h4><a href="blog-single.htm">A great artist is always before his time</a></h4>
+                        <ul class="blog-details-preview">
+                            <li><i class="icon-calendar"></i><strong>Posted on:</strong> Sept 4, 2015<li>
+                            <li><i class="icon-user"></i><strong>Posted by:</strong> <a href="#" title="Link">Admin</a><li>
+                            <li><i class="icon-comment"></i><strong>Comments:</strong> <a href="#" title="Link">12</a><li>
+                            <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a>, <a href="#">illustration</a>
+                        </ul>
+                    </div>
+                    <p class="blog-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Vestibulum lectus tellus, aliquet et iaculis sed, volutpat vel erat. <a href="#">Read more</a><p>
+                </div>
+
+                 <!-- Blog Item 3 -->
+                 <div class="item">
+                    <a href="blog-single.htm"><img src="{% static "events/images/gallery/blog-med-img-1.jpg" %}" alt="" class="align-left blog-thumb-preview" /></a>
+                    <div class="post-info clearfix">
+                        <h4><a href="blog-single.htm">Is art everything to anybody?</a></h4>
+                        <ul class="blog-details-preview">
+                            <li><i class="icon-calendar"></i><strong>Posted on:</strong> Sept 4, 2015<li>
+                            <li><i class="icon-user"></i><strong>Posted by:</strong> <a href="#" title="Link">Admin</a><li>
+                            <li><i class="icon-comment"></i><strong>Comments:</strong> <a href="#" title="Link">12</a><li>
+                            <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a>, <a href="#">illustration</a>
+                        </ul>
+                    </div>
+                    <p class="blog-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Vestibulum lectus tellus, aliquet et iaculis sed, volutpat vel erat. <a href="#">Read more</a><p>
+                </div>
+                
             </div>
+            </div> 	
         </div>
+        
+        <!-- Client Area
+        ================================================== -->
+        <div class="span6">
 
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-            <div class="pswp__share-tooltip"></div> 
+            <h5 class="title-bg">Recent Clients
+                <small>That love us</small>
+                <button id="btn-client-next" class="btn btn-inverse btn-mini" type="button">&raquo;</button>
+                <button id="btn-client-prev" class="btn btn-inverse btn-mini" type="button">&laquo;</button>
+            </h5>
+
+            <!-- Client Testimonial Slider-->
+            <div id="clientCarousel" class="carousel slide no-margin">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+
+                <div class="active item">
+                    <p class="quote-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Morbi blandit ultricies ultrices. Vivamus nec lectus sed orci molestie molestie."<cite>- Client Name, Big Company</cite></p>
+                </div>
+
+                <div class="item">
+                    <p class="quote-text">"Adipiscing elit. In interdum felis fermentum ipsum molestie sed porttitor ligula rutrum. Morbi blandit ultricies ultrices. Vivamus nec lectus sed orci molestie molestie."<cite>- Another Client Name, Company Name</cite></p>
+                </div>
+
+                <div class="item">
+                    <p class="quote-text">"Mauris eget tellus sem. Cras sollicitudin sem eu elit aliquam quis condimentum nulla suscipit. Nam sed magna ante. Ut eget suscipit mauris."<cite>- On More Client, The Company</cite></p>
+                </div>
+                
+            </div>
+            </div>
+
+            <!-- Client Logo Thumbs-->
+            <ul class="client-logos">
+                <li><a href="#" class="client-link"><img src="{% static "events/images/gallery/client-img-1.png" %}" alt="Client"></a></li>
+                <li><a href="#" class="client-link"><img src="{% static "events/images/gallery/client-img-2.png" %}" alt="Client"></a></li>
+                <li><a href="#" class="client-link"><img src="{% static "events/images/gallery/client-img-3.png" %}" alt="Client"></a></li>
+                <li><a href="#" class="client-link"><img src="{% static "events/images/gallery/client-img-4.png" %}" alt="Client"></a></li>
+                <li><a href="#" class="client-link"><img src="{% static "events/images/gallery/client-img-5.png" %}" alt="Client"></a></li>
+            </ul>
+
         </div>
-
-        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-        </button>
-
-        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-        </button>
-
-        <div class="pswp__caption">
-            <div class="pswp__caption__center"></div>
-        </div>
-
-    </div>
-
-</div>
-
-</div>
+        
+    </div><!-- End Bottom Section -->
+    
+    </div> <!-- End Container -->
 
 
-
-
-
-</div>
 {% endblock %}
-        {% block scripts %}
-        <!-- Core JS file -->
-        <script src="{% static "events/js/photoswipe.min.js" %}"></script>
-
-        <!-- UI JS file -->
-        <script src="{% static "events/js/photoswipe-ui-default.min.js" %}"></script>
-             <script src="{% static "events/js/events.js"%}"></script>
-             <script src="{% static "events/js/classie.js"%}"></script>
-			<script src="{% static "events/js/main.js"%}"></script>
-
-    {% endblock %}
-    
-    
-
-    
-    

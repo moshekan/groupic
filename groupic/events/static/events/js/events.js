@@ -1,4 +1,5 @@
 function loadEvent(id){
+    console.log("Load Events " + id);
 	//Put loading symbol
     //TODO
 
@@ -11,7 +12,7 @@ function loadEvent(id){
 
 
             initPhotoSwipeFromDOM('#photosGallery');    
-                $(".backbtn").show();
+            $(".backbtn").show();
 
 
   		})
@@ -25,7 +26,7 @@ function loadEvent(id){
 }
 function loadPhotos(photos){
 	//Throw away the events except the one we loaded - (keep them)
-	$(".eventsGallery").hide();
+	$("#eventsGallery").hide();
 	
 	$(".eventPhotoElement").remove();
 
@@ -287,5 +288,9 @@ $(document).ready(function() {
             }, 500);
             
         }
+    });
+    $(".click").click(function() {
+        var id = $(this).attr("id");
+        loadEvent(id);
     });
 });

@@ -23,7 +23,7 @@
                                 <a href="gallery-single.htm" class="item-details-link"></a>
                             </span>
                         </span>
-                        <a href="gallery-single.htm"><img onclick="loadEvent('{{ key }}')" src="{{value.14.full_res}}" class="gallery-top" alt="{{key}}"></a>
+                        <a ><img onclick="loadEvent('{{ key }}')" src="{{value.media.0.thumbnail}}" class="gallery-top" alt="{{key}}"></a>
                         <span class="project-details"><a href="gallery-single.htm">{{key}}</a>For an international ad campaign.</span>
                     </li>
                 </div>
@@ -151,3 +151,16 @@
 
 
 {% endblock %}
+
+        {% block scripts %}
+        <!-- Core JS file -->
+        <script src="{% static "events/js/photoswipe.min.js" %}"></script>
+
+        <!-- UI JS file -->
+        <script src="{% static "events/js/photoswipe-ui-default.min.js" %}"></script>
+             <script src="{% static "events/js/events.js"%}"></script>
+
+
+    {% endblock %}
+
+

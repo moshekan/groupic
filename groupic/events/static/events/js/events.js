@@ -4,7 +4,7 @@ function loadEvent(id){
     //TODO
 
 	//Make ajax request
-	$.ajax( "http://localhost:8000/event_detail?id="+id)
+	$.ajax( "/event_detail?id="+id)
   		.success(function(eventsArray) {
   		    //When ajax request ends- loadPhotos(photos)
     		loadPhotos(eventsArray);

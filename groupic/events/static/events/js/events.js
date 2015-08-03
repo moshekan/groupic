@@ -52,7 +52,7 @@ function goBack(){
 
 
 function getPhotoElement(thumbnailurl, caption, fullimage){
-	return '<figure id="arrange" fullimageurl="'+fullimage+'" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
+	return '<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
 }
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {
@@ -97,7 +97,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             if(linkEl.children.length > 0) {
                 // <img> thumbnail element, retrieving thumbnail url
-                item.src = linkEl.children[0].getAttribute('src');
+                item.src = linkEl.children[0].getAttribute('fullimageurl');
             } 
 
             item.el = figureEl; // save link to element for getThumbBoundsFn

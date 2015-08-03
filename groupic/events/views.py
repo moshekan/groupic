@@ -20,7 +20,7 @@ def contact_us(request):
 
 @render_to('about_us.html')
 def about_us(request):
-	return {'nav_contact':'active'}
+	return {'nav_about':'active'}
 
 @render_to('events.html')
 def index(request):

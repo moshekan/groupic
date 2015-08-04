@@ -7,8 +7,8 @@ import os.path as path
 FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
 
 
-@render_to('landing.html')
-def landing(request):
+@render_to('index.html')
+def newIndex(request):
 	return {'nav_home': 'active'}
 
 @render_to('features.html')

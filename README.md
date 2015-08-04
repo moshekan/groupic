@@ -14,3 +14,12 @@ git add -p
 git commit -m "INSERT UPDATES HERE"
 git push origin master
 ```
+
+
+## Setup postgres
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install libpq-dev python-dev
+sudo apt-get install postgresql postgresql-contrib
+```

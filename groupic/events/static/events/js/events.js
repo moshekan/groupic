@@ -294,3 +294,19 @@ $(document).ready(function() {
         loadEvent(id);
     });
 });
+
+function SearchEvents(str) {
+    // alert("sumtin sexy happened");
+    var divs = document.getElementsByClassName("helpSearch");
+    for(var i = 0; i < divs.length; i++){
+        var n = divs[i].innerHTML.toUpperCase().search(str.toUpperCase());
+        if (n > -1) {
+            alert(divs[i].innerHTML("bla"));
+            alert("yes " + divs[i].innerHTML + " " + n);
+        }
+    }
+}
+
+// function wordInString(s, word){
+//     return new RegExp( '\\b' + word + '\\b', 'i').test(s);
+// }

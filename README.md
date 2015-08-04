@@ -16,10 +16,11 @@ git push origin master
 ```
 
 
-## Setup postgres
+## Setup additional packages
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install libpq-dev python-dev
 sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install libncurses-dev
 ```

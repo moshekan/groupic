@@ -14,6 +14,9 @@ function loadEvent(id){
             initPhotoSwipeFromDOM('#photosGallery');    
             $(".backbtn").show();
 
+            id = id.replace(/-/g, " ");
+            $(".header1").html(id);
+
 
   		})
         .fail(function() {
@@ -259,36 +262,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 };
 
 $(document).ready(function() {
-    $('.backbtn').hide();
-    var sideBarOpen = false;
-    $("#navSideBar").click(function() {
-        if (!sideBarOpen) {
-            $("#navSideBar").animate({
-                left : "0px"
-            }, 500);
-            $("#hotfix2").animate({
-                left : "0px"
-            }, 500);
-            sideBarOpen = true;
-            $(".navs").css({
-                display : "block"
-            });
-        }else {
-            $("#navSideBar").animate({
-                left : "-130px"
-            }, 500);
-            $("#hotfix2").animate({
-                left : "-130px"
-            }, 500);
-            sideBarOpen = false;
-            setTimeout(function (){
-                $(".navs").css({
-                    display : "none"
-                });
-            }, 500);
-            
-        }
-    });
     $(".click").click(function() {
         var id = $(this).attr("id");
         loadEvent(id);
@@ -297,16 +270,77 @@ $(document).ready(function() {
 
 function SearchEvents(str) {
     // alert("sumtin sexy happened");
-    var divs = document.getElementsByClassName("helpSearch");
-    for(var i = 0; i < divs.length; i++){
-        var n = divs[i].innerHTML.toUpperCase().search(str.toUpperCase());
-        if (n > -1) {
-            alert(divs[i].innerHTML("bla"));
-            alert("yes " + divs[i].innerHTML + " " + n);
-        }
-    }
+    // var divs = document.getElementsByClassName("helpSearch");
+    // for(var i = 0; i < divs.length; i++){
+    //     var n = divs[i].innerHTML.toUpperCase().search(str.toUpperCase());
+    //     if (n > -1) {
+    //         divs[i].innerHTML("bla") = ""
+    //         alert("yes " + divs[i].innerHTML + " " + n);
+    //     }
+    // }
 }
 
 // function wordInString(s, word){
 //     return new RegExp( '\\b' + word + '\\b', 'i').test(s);
 // }
+
+function Start() {
+    $(".container").show();
+    $(".color-bar-1").show();
+    $(".color-bar-2").show();
+    $("#landing").css({
+        position : "absolute",
+        zIndex : "1000"});
+    $("#landing").animate({
+        top : "-100%"
+    }, 2000);
+    var expiration_date = new Date();
+    var cookie_string = '';
+    expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+    // Build the set-cookie string:
+    cookie_string = "landing=true; path=/; expires=" + expiration_date.toGMTString();
+    document.cookie = cookie_string;
+    // $(".container").css({position : "absolute"});
+    // $(".container").animate({
+    //     top : "0"
+    // }, 3000);
+    // $("#landing").delay(3000).hide();
+}
+
+// function Hide() {
+//     $(".container").hide();
+//     $(".color-bar-1").hide();
+//     $(".color-bar-2").hide();
+// }
+
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    return unescape(dc.substring(begin + prefix.length, end));
+} 
+
+function doSomething() {
+    var myCookie = getCookie("landing");
+
+    if (myCookie == "true") {
+        $("#landing").hide();
+    }else{
+        $("#landing").show();
+        $(".container").hide();
+        $(".color-bar-1").hide();
+        $(".color-bar-2").hide();
+    }
+}

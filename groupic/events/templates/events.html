@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %} Groupic - Latest event {% endblock %}
-{% block header %} Recent Events  <input class="right searchEvents" onkeyup="SearchEvents(this.value)" type="text" placeholder="Search Events">{% endblock %}
+{% block header %} Recent Events  <!--<input class="right searchEvents" onkeyup="SearchEvents(this.value)" type="text" placeholder="Search Events">-->{% endblock %}
+{% block landing %}
+<div id="landing">
+    <div class="centerize">
+        <span class="middlize">
+            <br><br> 
+            Real pictures from real people,<br>
+            About real events.<br><br>
+            <button class="btn btn-success" onclick="Start()">Get Started</button>
+        </span>
+    </div>
+</div>
+{% endblock %}
 {% block content %}
 
 {% block style %}
@@ -37,7 +49,11 @@
                             </span>
                         </span>
                         <a><img onclick="loadEvent('{{ key }}')" src="{{value.media.0.full_res}}" class="gallery-top" alt="{{key}}"></a>
-                        <span class="project-details"><a onclick="loadEvent('{{ key }}')" class="helpSearch">{{value.name}}</a><b>{{value.media|length}}</b> Pictures of {{value.name}}</span>
+                        <span class="project-details">
+                            <a onclick="loadEvent('{{ key }}')" class="helpSearch">{{value.name}}</a>
+                            <b>{{value.media|length}}</b>
+                            Pictures of {{value.name}}
+                        </span>
                     </li>
                 </div>
                      {% endfor %}
@@ -123,6 +139,13 @@
         <!-- UI JS file -->
         <script src="{% static "events/js/photoswipe-ui-default.min.js" %}"></script>
              <script src="{% static "events/js/events.js"%}"></script>
+             <script type="text/javascript">
+                doSomething();
+                // $(".container").hide();
+                // $(".color-bar-1").hide();
+                // $(".color-bar-2").hide();
+                // document.cookie = "landing=true";
+            </script>
 
 
     {% endblock %}

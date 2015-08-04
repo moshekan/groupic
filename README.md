@@ -20,7 +20,14 @@ git push origin master
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install libpq-dev python-dev
-sudo apt-get install postgresql postgresql-contrib
-sudo apt-get install libncurses-dev
+sudo apt-get install -y libpq-dev python-dev
+sudo apt-get install -y postgresql postgresql-contrib
+sudo apt-get install -y libncurses-dev
+```
+
+## For OSX
+
+```bash
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" # install homebrew
+brew install postgresql
 ```

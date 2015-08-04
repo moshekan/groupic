@@ -20,9 +20,10 @@ git push origin master
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y libpq-dev python-dev
+sudo apt-get install -y git ruby python-pip python-virtualenv libpq-dev python-dev
 sudo apt-get install -y postgresql postgresql-contrib
 sudo apt-get install -y libncurses-dev
+wget -O- https://toolbelt.heroku.com/install.sh | sh
 ```
 
 ## For OSX

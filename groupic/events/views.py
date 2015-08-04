@@ -46,16 +46,16 @@ def event_detail(request):
 def get_json_data(filename):
 	with open(filename) as f:
 		return json.loads(f.read())
-@ajax_request
-def upload_image(request):
-	if request.method == 'POST':
-		image = Images(request.POST, request.FILES)
-		if image.is_valid():
-			image.save()
-			return True
-		else:
-			image = Images()
-			return False
+#@ajax_request
+#def upload_image(request):
+#	if request.method == 'POST':
+#		image = Images(request.POST, request.FILES)
+#		if image.is_valid():
+#			image.save()
+#			return True
+#		else:
+#			image = Images()
+#			return False
 	
 
 

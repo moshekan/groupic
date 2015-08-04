@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from annoying.decorators import ajax_request, render_to
 from get_instagram_data import FILENAME
-from .models import Images
+#from .models import Images
 import json
 import os.path as path
 FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)

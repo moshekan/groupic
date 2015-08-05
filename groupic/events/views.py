@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from annoying.decorators import ajax_request, render_to
 from get_instagram_data import FILENAME
+#from models.py import Media
 
 import json
 import os.path as path
@@ -51,13 +52,8 @@ def get_json_data(filename):
 #@ajax_request
 #def upload_image(request):
 #	if request.method == 'POST':
-#		image = Images(request.POST, request.FILES)
-#		if image.is_valid():
-#			image.save()
-#			return True
-#		else:
-#			image = Images()
-#			return False
-	
+#		image = Media(request.POST, request.FILES)
+#		image.save()
+
 
 

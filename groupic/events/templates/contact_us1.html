@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} Groupic - Contact Us {% endblock %}
+{% block content %}
+    <!-- Page Content
+    ================================================== --> 
+    <div class="row"><!--Container row-->
+        <div class="span8 contact"><!--Begin page content column-->
+
+            <div class="span4 sidebar page-sidebar"><!-- Begin sidebar column -->
+            <h5 class="title-bg">Our Location</h5>
+            <address>
+            <strong>Israel</strong><br>
+            Jerusalem, Israel 94107
+            </address>
+            <address>
+            <h5 class="title-bg">Customer Service</h5>
+            <a href="mailto:#">Support@GrouPic.com</a><br>
+            <abbr title="Phone">P:</abbr> +972-54-5983-445
+            </address>
+
+            <!-- <h5 class="title-bg">Map Us</h5>
+            <img src="{% static "events/images/location-map.jpg" %}" alt="map"> -->
+
+        </div>
+
+            <div class="alert alert-success" style="display: none;">
+                Thanks for your feedback, we will answer you soon. 
+            </div>
+            <div class="alert alert-fail" style="display: none;">
+                Email adress is missing. 
+            </div>
+
+            <form action="#" id="contact-form">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    <input class="span4" id="prependedInput" size="16" type="text" placeholder="Name">
+                </div>
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input class="span4" id="prependedInput" size="16" type="text" placeholder="Email Address">
+                </div>
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-globe"></i></span>
+                    <input class="span4" id="prependedInput" size="16" type="text" placeholder="Website URL">
+                </div>
+                <textarea class="span6"></textarea>
+                <div class="row">
+                    <div class="span2">
+                        <input type="submit" class="btn btn-inverse" value="Send Message">
+                    </div>
+                </div>
+            </form>
+
+        </div> <!--End page content column-->
+
+        <!-- Sidebar
+        ================================================== --> 
+        <div class="span4 sidebar page-sidebar"><!-- Begin sidebar column -->
+            <h5 class="title-bg">Our Location</h5>
+            <address>
+            <strong>Israel</strong><br>
+            Jerusalem, Israel 94107
+            </address>
+            <address>
+            <h5 class="title-bg">Customer Service</h5>
+            <a href="mailto:#">Support@GrouPic.com</a><br>
+            <abbr title="Phone">P:</abbr> +972-54-5983-445
+            </address>
+
+            <!-- <h5 class="title-bg">Map Us</h5>
+            <img src="{% static "events/images/location-map.jpg" %}" alt="map"> -->
+
+        </div><!-- End sidebar column -->
+
+    </div><!-- End container row -->
+    
+    </div> <!-- End Container -->
+{% endblock %}
+    <!-- Footer Area
+        ================================================== -->
+

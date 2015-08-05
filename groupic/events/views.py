@@ -2,6 +2,7 @@ from django.shortcuts import render
 from annoying.decorators import ajax_request, render_to
 from get_instagram_data import FILENAME
 #from models.py import Media
+#from models.py import Event
 
 import json
 import os.path as path
@@ -56,4 +57,38 @@ def get_json_data(filename):
 #		image.save()
 
 
+@ajax_request
+def upload_image(request):
+	if request.method == 'POST':
+        	try:
+        	    drawing = Drawing(groupic=user.groupic,category = 			    category, date=datetime.datetime.now(pytz.UTC))
+            		drawing.save()
+            		filename = 'groupic/event/static/events/images/{0}.png'.format(drawing.id)
+            		drawing.filename=filename
+            		drawing.save()
+        	except:
+            		response { 'success' : False, 'message' : "the drawings didnt save"}
+        		handle_uploaded_file(request.FILES['file'], filename)
+        	return { 'success' : True}
+	
+    		else:
+    	   		return { 'success' : False, 'message' : "the immage didnt post"}
+
+
+def handle_uploaded_file(f, filename):
+    with open(filename, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+@ajax_request
+def join_event(request):
+	eventID = request.PUT.get('event_id')
+	event = Event.objects.get(pk=eventID)
+	event.users.add(request.user)
+	event.save()
+
+def view_images(request):
+	mediaID = request.session.get('media_id')
+		
+	
 

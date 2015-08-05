@@ -4,7 +4,7 @@ import datetime
 from geopy.geocoders import Nominatim
 from collections import Counter
 
-DISTANCE = 2500
+DISTANCE = 1500
 
 TEL_AVIV = (32.085300, 34.781768)
 RIO = (-22.906847, -43.172896)

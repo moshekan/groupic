@@ -1,10 +1,14 @@
-from instagram.client import InstagramAPI
-import json
-import datetime
-from geopy.geocoders import Nominatim
 from collections import Counter
+import datetime
+import glob
+import json
+from instagram.client import InstagramAPI
+from geopy.geocoders import Nominatim
 
-DISTANCE = 2500
+
+
+
+DISTANCE = 1500
 
 TEL_AVIV = (32.085300, 34.781768)
 RIO = (-22.906847, -43.172896)
@@ -24,18 +28,18 @@ SYRIA = (34.802075, 38.996815)
 
 
 EVENTS = {
-'gaza-war-2015': {'tags': {'gaza','gaza4life','gazawillbefree','gazaunderattack'},
-		'locations': [GAZA, JERUSALEM, RAMALLAH],
-		'name': "Gaza War 2015"
-		},
+# 'gaza-war-2015': {'tags': {'gaza','gaza4life','gazawillbefree','gazaunderattack'},
+# 		'locations': [GAZA, JERUSALEM, RAMALLAH],
+# 		'name': "Gaza War 2015"
+# 		},
 'olympics-summer-2012': {'tags': {'olympics', 'olympics2012', 'olympicsherewecome'}, 
 		'locations': [LONDON],
 		'name': "The Olympic Games 2012"
 		},
-'fifa-world-cup-2014': {'tags': {'fifaworldcup', 'worldcup', 'fifaworldcup2014', 'fifaworldclupbrasil2014'},
-			'locations': [RIO],
-			'name': "Fifa World Cup"
-			},
+# 'fifa-world-cup-2014': {'tags': {'fifaworldcup', 'worldcup', 'fifaworldcup2014', 'fifaworldclupbrasil2014'},
+# 			'locations': [RIO],
+# 			'name': "Fifa World Cup"
+# 			},
 'gay-pride-israel-2015': {'tags': {'gay', 'gaypride', 'gayprideisrael', 'israel', 'israelgayparade', 'gayprideparade', 'gaypride2015', 'gayparade2015', 'gayprideisrael'}, 		
 			'locations': [TEL_AVIV],
 		'name': "Gay Pride 2015",
@@ -72,7 +76,7 @@ EVENTS = {
 		}
 
 }
-
+PATTERN  ='-chunk.json'
 FILENAME="events.json"
 ACCESS_TOKEN = "2047500927.3561200.794e724d28454fb19b92f10fbd11b90f"
 CLIENT_SECRET = "07eba75913484e75bf71a12e8a5932ce"
@@ -182,13 +186,7 @@ def get_event_dict(api, event):
 
 
         
-def get_events():
-    api = InstagramAPI(access_token=ACCESS_TOKEN, client_secret=CLIENT_SECRET)
-    events = {}
-    for event_name, event in EVENTS.iteritems():
-        print "Searching event:", event_name
-        events[event_name]=get_event_dict(api, event)
-    return events
+
 
 def write_to_file(filename, events):
     with open(filename, 'w') as f:
@@ -197,6 +195,14 @@ def write_to_file(filename, events):
 def read_from_file(filename):
 	with open(filename) as f:
     		return json.loads(f.read())
+
+def combine_json_files(pattern=PATTERN, newfile=FILENAME):
+    data={}
+    for filename in glob.glob("*" + pattern):
+        event_name = filename.split(pattern)[0]
+        data[event_name] = read_from_file(filename)
+    write_to_file(newfile, data)
+
 def get_tags_counter(events):
 	all_tags = {}
 
@@ -211,8 +217,25 @@ def print_most_common_tags(counters, top_count=10):
 	for event_name, counter in counters.iteritems():
 		for tag, count in counter.most_common(top_count):
 			print "%s\t%s" % (tag, count)
+def get_all_events(api):
+    events = {}
+    for event_name, event in EVENTS.iteritems():
+        get_event(api, event_name, event)
+    write_to_file(FILENAME, events)
+
+def get_event(api, event_key, event):
+    event_dict = get_event_dict(api, event)
+    filename = event_key + PATTERN
+    write_to_file(filename, event_dict)
 
 if __name__ == "__main__":
-    events = get_events()
-    print events
-    write_to_file(FILENAME, events)
+    import sys
+    api = InstagramAPI(access_token=ACCESS_TOKEN, client_secret=CLIENT_SECRET)
+    if len(sys.argv) == 1 or sys.argv[1] == "--all":
+        print "getting all events"
+        get_all_events(api)
+    else:
+        event_key = sys.argv[1]
+        event = EVENTS[event_key]
+        print "getting event:", event['name']
+        get_event(api, event_key, event)

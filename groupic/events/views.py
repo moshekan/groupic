@@ -10,7 +10,9 @@ FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
 
 @render_to('index.html')
 def newIndex(request):
-	return {'nav_home': 'active'}
+	context = {"events" : get_json_data(FILENAME),
+	'nav_home':'active'}
+	return context
 
 @render_to('features.html')
 def features(request):

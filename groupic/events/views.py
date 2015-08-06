@@ -70,12 +70,12 @@ def upload_image(request):
 		event_id = request.POST.get('event_id')
 		# TODO ensure user is part of the event
 		media = Media(groupic=request.user.groupic, event=Event.objects.get(str_id=event_id))
-    		media.save()
-    		filename = 'groupic/event/static/events/images/{0}.png'.format(media.id)
-    		media.full_res = filename
+			media.save()
+			filename = 'groupic/event/static/events/images/{0}.png'.format(media.id)
+			media.full_res = filename
 		# TODO create a real thumbnail			
 		media.thumbnail = filename
-    		media.save()
+			media.save()
 		handle_uploaded_file(request.FILES['media_data'], filename)
 	except ObjectDoesNotExist:
 		success = False
@@ -87,27 +87,27 @@ def upload_image(request):
 	return { 'success' : success, 'error_msg': error_msg}
 
 def handle_uploaded_file(f, filename):
-    with open(filename, 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+	with open(filename, 'wb+') as destination:
+		for chunk in f.chunks():
+			destination.write(chunk)
 @require_http_methods(["POST"])
 @ajax_request
 @csrf_exempt
 def join_private_event(request):
 	success = True
 	error_msg = ""
-    event = {}		
-    try:
-        barcode = request.POST.get('barcode')
-        event = Event.objects.get(barcode=barcode)
-       	#event.users.add(auth.get_user(request))
-    except ObjectDoesNotExist:
+	event = {}		
+	try:
+		barcode = request.POST.get('barcode')
+		event = Event.objects.get(barcode=barcode)
+		#event.users.add(auth.get_user(request))
+	except ObjectDoesNotExist:
 		success = False
 		error_msg = "Barcode wasn't found for " + barcode
-    except Exception as e:
+	except Exception as e:
 		success = False
 		error_msg = str(e)
-    return { 'success' : success, 'error_msg': error_msg, 'event' : event.serialize()}
+	return { 'success' : success, 'error_msg': error_msg, 'event' : event.serialize()}
 
 @ajax_request
 def view_images(request):

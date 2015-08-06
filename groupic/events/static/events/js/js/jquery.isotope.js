@@ -150,7 +150,8 @@
     var transformFnNotations = Modernizr.csstransforms3d ?
       { // 3D transform functions
         translate : function ( position ) {
-          return 'translate3d(' + position[0] + 'px, ' + position[1] + 'px, 0) ';
+          // return 'translate3d(' + position[0] + 'px, ' + position[1] + 'px, 0) ';
+          return 0;
         },
         scale : function ( scale ) {
           return 'scale3d(' + scale + ', ' + scale + ', 1) ';
@@ -337,7 +338,7 @@
     visibleStyle: { opacity: 1, scale: 1 },
     containerStyle: {
       position: 'relative',
-      overflow: 'hidden'
+      // overflow: 'hidden'
     },
     animationEngine: 'best-available',
     animationOptions: {
@@ -1027,10 +1028,10 @@
           props.y = props.height;
         }
 
-        // position the atom
+        // position the atomF
         instance._pushPosition( $this, props.x, props.y );
 
-        props.height = Math.max( props.y + atomH, props.height );
+        // props.height = Math.max( props.y + atomH, props.height );
         props.x += atomW;
 
       });

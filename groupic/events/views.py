@@ -16,7 +16,7 @@ FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
 
 @render_to('index.html')
 def newIndex(request):
-	context = {"events" : get_json_data(FILENAME),
+	context = {"events" : get_event_json(),
 	'nav_home':'active'}
 	return context
 
@@ -34,15 +34,14 @@ def about_us(request):
 
 @render_to('events.html')
 def index(request):
-	context = {"events" : get_json_data(FILENAME),
+	context = {"events" : get_event_json(),
 	'nav_home':'active'}
 	return context
 
 
 @ajax_request
 def events(request):
-	events = Event.objects.all() or {}
-	return {"events": serializers.serialize("json", events)}
+	return get_event_json()
 
 def event_detail_live(request):
 	event_id = request.Get.get('event_id')
@@ -53,7 +52,10 @@ def event_detail_live(request):
 def get_json_data(filename):
 	with open(filename) as f:
 		return json.loads(f.read())
-			
+
+def get_event_json():
+	events = Event.objects.all() or {}
+	return {"events": serializers.serialize("json", events)}
 
 #SUNDAY DEMO
 

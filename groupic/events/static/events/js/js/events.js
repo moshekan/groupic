@@ -1,14 +1,23 @@
+$(".json").hide();
+
 function loadEvent(id){
     console.log("Load Events " + id);
-	//Put loading symbol
+    //Put loading symbol
     //TODO
 
-	//Make ajax request
-	$.ajax( "/event_detail?id="+id)
-  		.success(function(eventOb) {
-  		    //When ajax request ends- loadPhotos(photos)
-    		loadPhotos(eventOb.media);
+    //Make ajax request
+    $.ajax( "/event_detail?id="+id)
+        .success(function(eventOb) {
+            //When ajax request ends- loadPhotos(photos)
+            loadPhotos(eventOb.media);
             $("#photosGallery").show();
+            // $(".eventPhotoElement").hide();
+
+            $("json").show();
+
+            $('.eventPhotoElement').each(function(i) {
+                $(this).children().children().css({ opacity : "0"}).delay(800*i).animate({ opacity : "1"})
+            });
 
 
             initPhotoSwipeFromDOM('#photosGallery');    
@@ -17,32 +26,49 @@ function loadEvent(id){
             id = id.replace(/-/g, " ");
             $(".header1").html(id);
 
-  		})
+            $(".section-title").hide();
+
+            // refresh = true;
+
+
+        })
         .fail(function() {
             console.log("Error");
         });
-}
 
+
+
+
+}
 function loadPhotos(photos){
-  //Throw away the events except the one we loaded - (keep them)
-  $("#eventsGallery").hide();
-  
-  $(".eventPhotoElement").remove();
+    //Throw away the events except the one we loaded - (keep them)
+    $("#eventsGallery").hide();
+    
+    $(".eventPhotoElement").remove();
 
-  //create elements for images underneat main
-  for(var i = 0; i < photos.length; i++){
-    $( "#photosGallery" ).append( getPhotoElement(photos[i].thumbnail, photos[i].username, photos[i].full_res));
-  }
-  $("#photosGallery").show();
-  //animate these images
+    //create elements for images underneat main
+    for(var i = 0; i < photos.length; i++){
+        $( "#photosGallery" ).append( getPhotoElement(photos[i].thumbnail, photos[i].username, photos[i].full_res));
+    }
+    $("#photosGallery").show();
+    //animate these images
 
-  //Back button element unhide
+    //Back button element unhide
 
-  initPhotoSwipeFromDOM('#photosGallery');  
+    initPhotoSwipeFromDOM('#photosGallery');    
 }
+
+function goBack(){
+    $("#photosGallery").hide();
+    //Make photosgo back into event
+    $(".eventsGallery").show();
+    //Load back events
+    $(".backbtn").hide();
+}
+
 
 function getPhotoElement(thumbnailurl, caption, fullimage){
-  return '<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" /></a><figcaption itemprop="'+caption+'">'+caption+'</figcaption></figure>';
+    return '<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption> --></figure>';
 }
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {
@@ -96,7 +122,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         console.log(items);
         return items;
     };
-    
+
     // find nearest parent element
     var closest = function closest(el, fn) {
         return el && ( fn(el) ? el : closest(el.parentNode, fn) );
@@ -142,7 +168,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
         if(index >= 0) {
             // open PhotoSwipe if valid index found
-            openPhotoSwipe( index, clickedGallery );
+            openPhotoSwipe( index-1, clickedGallery );
         }
         return false;
     };
@@ -247,3 +273,21 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
     }
 };
+
+// (function(){
+//     alert("send to server " + Math.floor(Date.now() / 1000));
+//     setTimeout(arguments.callee, 10000);
+// })();
+
+// $(".json").click(function() {
+//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore( $("#arrange") );
+//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore($("#arrange"));
+//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore($("#arrange"));
+//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore($("#arrange"));
+// });
+
+
+
+// http://photogallery.indiatimes.com/photodhamal-sports/football/germany-beat-argentina-for-world-cup-glory/photo/38355346/Germanys-forward-Andre-Schuerrle-front-C-and-team-mates-celebrate-with-the-World-Cup-trophy-after-they-won-the-2014-FIFA-World-Cup-final-football-match-between-Germany-and-Argentina-1-0-following-extra-time-at-the-Maracana-Stadium-in-Rio-de-Janeiro-Brazil-on-July-13-2014-.jpg
+
+//<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption> --></figure>';

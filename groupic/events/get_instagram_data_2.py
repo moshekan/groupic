@@ -79,7 +79,7 @@ EVENTS = {
 
 }
 PATTERN  ='-chunk.json'
-FILENAME="events.json"
+FILENAME="events.json-bak"
 ACCESS_TOKEN = "2047500927.3561200.794e724d28454fb19b92f10fbd11b90f"
 CLIENT_SECRET = "07eba75913484e75bf71a12e8a5932ce"
 LIKE_COUNT = 5
@@ -192,7 +192,7 @@ def get_event_dict(api, event):
 
 def write_to_file(filename, events):
     with open(filename, 'w') as f:
-        f.write(json.dumps(byteify(events)))
+        f.write(json.dumps(byteify(events), indent=4, sort_keys=True))
 
 def read_from_file(filename):
 	with open(filename) as f:

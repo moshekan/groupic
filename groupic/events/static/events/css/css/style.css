@@ -14,6 +14,7 @@ body, html{
     background-repeat: no-repeat;
 	width: 250px;
 	height: 50px;
+	margin: 2px;
 }
 
 
@@ -580,3 +581,43 @@ nav#footer p{
 	background: #FCAC45;
 	border-color: #FCAC45;
 	color: #ffffff;
+}
+#arrange {
+	text-align: center;
+	display: inline-block;
+}
+.image-wrap {
+        -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+        -moz-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+        box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+        border-radius: 10px;
+}
+ 
+.image-wrap:after {
+        position: absolute;
+        content: ' ';
+        width: 60px;
+        height: 25px;
+        top: -10px;
+        left: 50%;
+        margin-left: -30px;
+        border: solid 1px rgba(137,130,48,.2);
+ 
+        background: -moz-linear-gradient(top, rgba(254,243,127,.6) 0%, rgba(240,224,54,.6) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,243,127,.6)), color-stop(100%,rgba(240,224,54,.6)));
+        background: linear-gradient(top, rgba(254,243,127,.6) 0%,rgba(240,224,54,.6) 100%);
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 1px 0 rgba(0,0,0,.2);
+}
+.gallery {
+	width: 100%;
+	text-align: center;
+}
+.centerize {
+	width: 100%;
+	text-align: center;
+}
+.pagination {list-style:none; margin:0px; padding:0px;}  
+.pagination li{float:left; margin:3px;}  
+.pagination li a{   display:block; padding:3px 5px; color:#fff; background-color:#44b0dd; text-decoration:none;}  
+.pagination li a.active {border:1px solid #000; color:#000; background-color:#fff;}  
+.pagination li a.inactive {background-color:#eee; color:#777; border:1px solid #ccc;}  

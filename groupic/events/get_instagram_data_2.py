@@ -1,4 +1,6 @@
 from collections import Counter
+from events.models import Media
+from events.models import Event
 import datetime
 import glob
 import json
@@ -77,7 +79,7 @@ EVENTS = {
 
 }
 PATTERN  ='-chunk.json'
-FILENAME="events.json-bak"
+FILENAME="events.json"
 ACCESS_TOKEN = "2047500927.3561200.794e724d28454fb19b92f10fbd11b90f"
 CLIENT_SECRET = "07eba75913484e75bf71a12e8a5932ce"
 LIKE_COUNT = 5
@@ -226,8 +228,18 @@ def get_all_events(api):
 def get_event(api, event_key, event):
     event_dict = get_event_dict(api, event)
     filename = event_key + PATTERN
-    write_to_file(filename, event_dict)
+    write_to_file(filename, {filename:event_dict})
 
+def json_to_db(filename):
+	data = read_from_file(filename)
+	
+	for key,value in data.iteritems():
+		event = Event(str_id=key, name=value['name'], is_public=True)
+		event.save()
+		print "created event %s" %key
+		for media in value['media']:
+			media = Media(full_res=media['full_res'], thumbnail = media['thumbnail'], event=event)
+			media.save()
 if __name__ == "__main__":
     import sys
     api = InstagramAPI(access_token=ACCESS_TOKEN, client_secret=CLIENT_SECRET)

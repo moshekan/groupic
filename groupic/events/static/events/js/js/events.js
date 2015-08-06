@@ -6,7 +6,7 @@ function loadEvent(id){
     //TODO
 
     //Make ajax request
-    $.ajax( "/event_detail?id="+id)
+    $.ajax( "/view_images?event_id="+id)
         .success(function(eventOb) {
             //When ajax request ends- loadPhotos(photos)
             loadPhotos(eventOb.media);

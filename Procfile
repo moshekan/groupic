@@ -1,1 +1,1 @@
-web: cd groupic; gunicorn groupic.wsgi:application
+web: cd groupic; python manage.py migrate; gunicorn groupic.wsgi:application

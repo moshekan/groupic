@@ -1,6 +1,8 @@
-from django.shortcuts import render
+ django.shortcuts import render
+
 from annoying.decorators import ajax_request, render_to
 from get_instagram_data import FILENAME
+from django.core import serializers
 #from models.py import Media
 #from models.py import Event
 
@@ -50,6 +52,15 @@ def event_detail(request):
 def get_json_data(filename):
 	with open(filename) as f:
 		return json.loads(f.read())
+
+def json_to_db(filename):
+	data = get_json_data(FILENAME)
+	for key, value in data:
+		for media in value:
+			
+
+#SUNDAY DEMO
+
 #@ajax_request
 #def upload_image(request):
 #	if request.method == 'POST':
@@ -61,7 +72,7 @@ def get_json_data(filename):
 def upload_image(request):
 	if request.method == 'POST':
         	try:
-        	    drawing = Drawing(groupic=user.groupic,category = 			    category, date=datetime.datetime.now(pytz.UTC))
+        	    media = Media(groupic=user.groupic,url = 			    url, created_at=datetime.datetime.now(pytz.UTC))
             		drawing.save()
             		filename = 'groupic/event/static/events/images/{0}.png'.format(drawing.id)
             		drawing.filename=filename
@@ -81,14 +92,17 @@ def handle_uploaded_file(f, filename):
             destination.write(chunk)
 
 @ajax_request
-def join_event(request):
-	eventID = request.PUT.get('event_id')
-	event = Event.objects.get(pk=eventID)
+def join_private_event(request):
+	bcode = request.PUT.get('barcode')
+	event = Event.objects.get(barcode=bcode)
 	event.users.add(request.user)
 	event.save()
+	return serializers.serialize("json", event)
 
+@ajax_request
 def view_images(request):
-	mediaID = request.session.get('media_id')
-		
-	
+	eventID = request.PUT.get('event_id')
+	event = Event.objects.get(pk=eventID)
+	return serializers.serialize("json", event.photo.all())
+
 

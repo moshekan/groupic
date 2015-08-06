@@ -41,7 +41,7 @@ def index(request):
 
 @ajax_request
 def events(request):
-	return {'events': get_serial_events()}
+	return get_serial_events()
 
 
 def get_json_data(filename):

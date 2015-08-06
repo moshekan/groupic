@@ -16,7 +16,7 @@ FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
 
 @render_to('index.html')
 def newIndex(request):
-	context = {"events" : get_json_data(FILENAME),
+	context = {"events" : get_serial_events(),
 	'nav_home':'active'}
 	return context
 
@@ -34,15 +34,14 @@ def about_us(request):
 
 @render_to('events.html')
 def index(request):
-	context = {"events" : get_json_data(FILENAME),
+	context = {"events" : get_serial_events(),
 	'nav_home':'active'}
 	return context
 
 
 @ajax_request
 def events(request):
-	events = Event.objects.all() or {}
-	return {"events": serializers.serialize("json", events)}
+	return {'events': get_serial_events()}
 
 def event_detail_live(request):
 	event_id = request.Get.get('event_id')
@@ -53,7 +52,10 @@ def event_detail_live(request):
 def get_json_data(filename):
 	with open(filename) as f:
 		return json.loads(f.read())
-			
+
+def get_serial_events():
+	events = Event.objects.all() or {}
+	return {event.str_id: event.serialize() for event in events }
 
 #SUNDAY DEMO
 
@@ -109,7 +111,7 @@ def join_private_event(request):
     except Exception as e:
 		success = False
 		error_msg = str(e)
-    return { 'success' : success, 'error_msg': error_msg, 'event' : serializers.serialize("json", event)}
+    return { 'success' : success, 'error_msg': error_msg, 'event' : event.serialize()}
 
 @ajax_request
 def view_images(request):
@@ -119,5 +121,5 @@ def view_images(request):
 		media = event.media_set.all()
 	else:
 		media = []  
-	return {'media' : serializers.serialize("json", media)}
+	return {'media' : map(lambda x: x.serialize(), media)}
 

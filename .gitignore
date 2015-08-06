@@ -58,5 +58,5 @@ target/
 groupic-env/
 .DS_Store
 *~
-*.sqlite3
+*.sqlite3*
 *-chunk.json

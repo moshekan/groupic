@@ -101,7 +101,6 @@ def join_private_event(request):
         barcode = request.POST.get('barcode')
         event = Event.objects.get(barcode=barcode)
        	#event.users.add(auth.get_user(request))
-        event.save()
     except ObjectDoesNotExist:
 		success = False
 		error_msg = "Barcode wasn't found for " + barcode

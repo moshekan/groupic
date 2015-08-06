@@ -104,7 +104,7 @@ def join_private_event(request):
         event.save()
     except ObjectDoesNotExist:
 		success = False
-		error_msg = "Barcode wasn't found"
+		error_msg = "Barcode wasn't found for " + barcode
     except Exception as e:
 		success = False
 		error_msg = str(e)

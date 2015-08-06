@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
 from annoying.functions import get_object_or_None
 
 from annoying.decorators import ajax_request, render_to
@@ -91,6 +92,7 @@ def handle_uploaded_file(f, filename):
             destination.write(chunk)
 @require_http_methods(["POST"])
 @ajax_request
+@csrf_exempt
 def join_private_event(request):
     success = True
     error_msg = ""

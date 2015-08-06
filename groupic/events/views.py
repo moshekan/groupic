@@ -95,7 +95,7 @@ def handle_uploaded_file(f, filename):
 @csrf_exempt
 def join_private_event(request):
 	success = True
-    error_msg = ""
+	error_msg = ""
     event = {}		
     try:
         barcode = request.POST.get('barcode')

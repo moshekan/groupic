@@ -31,8 +31,8 @@ class Event(models.Model):
 
 class Media(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
-	full_res = models.CharField(max_length=255)
-	thumbnail =models.CharField(max_length=255)
+	full_res = models.TextField()
+	thumbnail =models.TextField()
 	user = models.ForeignKey(User, null=True, blank=True, default=None)
 	event = models.ForeignKey(Event)
 

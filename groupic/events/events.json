@@ -248,8 +248,7 @@
                 "tags": ["fifaworldcup2014", "fifa_world_cup"],
                 "thumbnail": "http://photogallery.indiatimes.com/photo/36650288.cms",
                 "username": "10"
-            },
-
+            }
         ],
         "name": "Fifa World Cup"
     },
@@ -312,11 +311,11 @@
             "username": "7"
         }, {
             "created_time": 1416553162,
-            "full_res": https: //pbs.twimg.com/media/CLWlF0DUYAA-kyK.jpg", 
+            "full_res": "https://pbs.twimg.com/media/CLWlF0DUYAA-kyK.jpg", 
                 "like_count": 15,
             "location": "",
             "tags": ["gay_pride_israel", "gay_pride2015"],
-            "thumbnail": "hhttps://pbs.twimg.com/media/CLWlF0DUYAA-kyK.jpg",
+            "thumbnail": "https://pbs.twimg.com/media/CLWlF0DUYAA-kyK.jpg",
             "username": "8"
         }, {
             "created_time": 1416553162,
@@ -520,7 +519,7 @@
             "username": "2"
         }, {
             "created_time": 1424491694,
-            "full_res": http: //sportsthenandnow.com/wp/wp-content/uploads/2011/06/LJames-JShot-vs-CBrewer-Chicago-EFinals.jpg", 
+            "full_res": "http://sportsthenandnow.com/wp/wp-content/uploads/2011/06/LJames-JShot-vs-CBrewer-Chicago-EFinals.jpg", 
                 "like_count": 113,
             "location": "",
             "tags": ["nbafinals", "nba_finals2015"],

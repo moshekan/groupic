@@ -98,10 +98,7 @@
                     <li class="pull-right">
                         <ol class="type">
                             <li><a href="#" data-filter="*" class="active">All</a></li>
-                            <li><a href="#" data-filter=".web">Web Design</a></li>
-                            <li><a href="#" data-filter=".photography">Photography</a></li>
-                            <li><a href="#" data-filter=".app" >Mobile App</a></li>
-                            <li><a href="#" data-filter=".branding" >Branding</a></li>
+                            <li><a href="#" data-filter=".israel" >Israel</a></li>
                         </ol>
                     </li>
                 </ul>
@@ -109,11 +106,11 @@
             </div>
 
             <div id="lightbox" class="row">
+                <div id="eventsGallery">
                 {%for key,value in events.items%}
-                <div class="col-sm-6 col-md-3 col-lg-3 branding">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="#">
+                    <div class="col-sm-6 col-md-3 col-lg-3 branding click" onclick="loadEvent('{{ key }}')">
+                        <div class="portfolio-item">
+                            <div class="hover-bg">
                                 <div class="hover-text">
                                     <h4>{{value.name}}</h4>
                                     <small><b>{{value.media|length}}</b> Pictures of {{value.name}}</small>
@@ -121,11 +118,12 @@
                                     <i class="fa fa-plus"></i>
                                 </div>
                                 <img src="{{value.media.0.full_res}}" class="img-responsive" alt="{{value.name}}">
-                            </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="gallery" id="photosGallery" style="display:none" itemscope itemtype="http://schema.org/ImageGallery"></div>
                 <!-- <div class="col-sm-6 col-md-3 col-lg-3 photography app">
                     <div class="portfolio-item">
                         <div class="hover-bg">
@@ -411,6 +409,7 @@
     <script type="text/javascript" src="{% static "events/js/js/bootstrap.js" %}"></script>
     <script type="text/javascript" src="{% static "events/js/js/SmoothScroll.js" %}"></script>
     <script type="text/javascript" src="{% static "events/js/js/jquery.isotope.js" %}"></script>
+    <script type="text/javascript" src="{% static "events/js/js/events.js" %}"></script>
 
     <script src="{% static "events/js/js/owl.carousel.js" %}"></script>
 

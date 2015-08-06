@@ -43,11 +43,6 @@ def index(request):
 def events(request):
 	return {'events': get_serial_events()}
 
-def event_detail_live(request):
-	event_id = request.Get.get('event_id')
-	event = Event.objects.get(str_id=str_id)
-	return event.media_set.all()
-		
 
 def get_json_data(filename):
 	with open(filename) as f:
@@ -115,11 +110,10 @@ def join_private_event(request):
 
 @ajax_request
 def view_images(request):
-	str_id = request.GET.get('event_id')
+	str_id = request.GET.get('event_id', request.GET.get('id'))
 	event = get_object_or_None(Event, str_id=str_id)
 	if event:    	
 		media = event.media_set.all()
 	else:
 		media = []  
 	return {'media' : map(lambda x: x.serialize(), media)}
-

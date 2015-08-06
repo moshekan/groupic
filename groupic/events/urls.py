@@ -11,6 +11,7 @@ urlpatterns = [
 	url(r'^upload$', views.upload_image, name='upload_image'),
 	url(r'join_private$', views.join_private_event, name='join_private_event'),
 	url(r'view_images$', views.view_images, name='view_images'),
+	url(r'event_detail$', views.view_images, name='view_images'),
     	url(r'^$', views.index, name='index'),
 
 

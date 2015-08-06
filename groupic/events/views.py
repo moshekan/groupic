@@ -63,14 +63,14 @@ def get_serial_events():
 
 @require_http_methods(["POST"])
 @ajax_request
+@csrf_exempt
 def upload_image(request):
 	success = True
 	error_msg = ""	
 	try:
 		event_id = request.POST.get('event_id')
 		# TODO ensure user is part of the event
-		media = Media(groupic=request.user.groupic, event=Event.objects.get(str_id=event_id))
-		media.save()
+		media = Media(event=Event.objects.get(str_id=event_id))
 		filename = 'groupic/event/static/events/images/{0}.png'.format(media.id)
 		media.full_res = filename
 		# TODO create a real thumbnail			

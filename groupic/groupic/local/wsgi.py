@@ -1,1 +1,0 @@
-/home/meet/Desktop/groupic/groupic/groupic/wsgi.py

@@ -32,7 +32,7 @@ def contact_us(request):
 def about_us(request):
 	return {'nav_about':'active'}
 
-@render_to('events.html')
+@render_to('index.html')
 def index(request):
 	context = {"events" : get_serial_events(),
 	'nav_home':'active'}

@@ -13,17 +13,19 @@ class Event(models.Model):
 	#objects = models.GeoManager()
 	users = models.ManyToManyField(User, related_name='user', blank=True, default = None)
 	admin = models.ForeignKey(User, related_name='admin', null=True, blank=True, default = None)
-	bar_code = models.CharField(max_length=255)
+	barcode = models.CharField(max_length=255)
 	
 	def __unicode__(self):
 		return u"Event %s" % self.str_id
 
 class Media(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
-	url = models.CharField(max_length = 255)
 	full_res = models.CharField(max_length=255)
 	thumbnail =models.CharField(max_length=255)
 	user = models.ForeignKey(User, null=True, blank=True, default=None)
 	event = models.ForeignKey(Event)
+
+	def __unicode__(self):
+		return u"Media %s" % self.str_full_res
 	
 

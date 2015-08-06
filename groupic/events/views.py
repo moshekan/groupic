@@ -70,12 +70,12 @@ def upload_image(request):
 		event_id = request.POST.get('event_id')
 		# TODO ensure user is part of the event
 		media = Media(groupic=request.user.groupic, event=Event.objects.get(str_id=event_id))
-			media.save()
-			filename = 'groupic/event/static/events/images/{0}.png'.format(media.id)
-			media.full_res = filename
+		media.save()
+		filename = 'groupic/event/static/events/images/{0}.png'.format(media.id)
+		media.full_res = filename
 		# TODO create a real thumbnail			
 		media.thumbnail = filename
-			media.save()
+		media.save()
 		handle_uploaded_file(request.FILES['media_data'], filename)
 	except ObjectDoesNotExist:
 		success = False

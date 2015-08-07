@@ -139,16 +139,15 @@ def join_private_event(request):
 @ajax_request
 def view_images(request):
 	str_id = request.GET.get('event_id', request.GET.get('id'))
-	timestamp = request.GET.get('timestamp')
+	last_id = request.GET.get('last_id')
 	event = get_object_or_None(Event, str_id=str_id)
 	if event:    	
-		if timestamp is None:
+		if last_id is None:
 			media = event.media_set.all()
 		else:
                         try:
-                            timestamp = int(timestamp)
-                            dt = datetime.datetime.fromtimestamp(int(timestamp)/1000.0)
-                            media = event.media_set.filter(created_at__gt=dt).exclude(full_res__exact='')
+                            last_id = int(last_id)
+                            media = event.media_set.filter(pk__gt=last_id).exclude(full_res__exact='')
                         except ValueError:
                             media = []
 	else:

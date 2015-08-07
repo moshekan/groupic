@@ -19,6 +19,7 @@ class Event(models.Model):
 	def serialize(self):
                 media = reversed(self.media_set.all())
 		return {
+                        'id': self.pk,
 			'name': self.name,
 			'str_id': self.str_id,
 			'is_public':self.is_public,
@@ -39,6 +40,7 @@ class Media(models.Model):
 
 	def serialize(self):
 		return {
+                        'id': self.pk,
 			'created_at': self.created_at,
 			'full_res': self.full_res,
 			'thumbnail': self.thumbnail,

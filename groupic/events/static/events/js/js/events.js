@@ -12,7 +12,7 @@ function loadEvent(id){
             loadPhotos(eventOb.media);
             $("#photosGallery").show();
             $("#photosGallery").data('id', id);
-            $("#photosGallery").data('lastTimestamp', new Date().getTime());
+            $("#photosGallery").data('lastId', eventOb.media[0].id);
             $(".backbtn").show();
 
             $('.eventPhotoElement').each(function(i) {
@@ -289,26 +289,26 @@ $(".backbtn").click(function() {
 });
 
 var POLL_FREQ = 10000;
-var lastTimestamp = null;
+var lastId = null;
 (function(){
     requestImagesFromServer(writeToHTML);
     setTimeout(arguments.callee, POLL_FREQ);
 })();
 
 function requestImagesFromServer(callback) {
-    if (!lastTimestamp) {
-      lastTimestamp = $('#photosGallery').data('lastTimestamp')
+    if (!lastId) {
+      lastId = $('#photosGallery').data('lastId')
     }
-    console.log("send to server " + lastTimestamp);
+    console.log("send to server " + lastId);
     var event_id = $("#photosGallery").data('id');
-    // ask server for images bigger than {lastTimestamp}
-    $.get('view_images?timestamp=' + lastTimestamp + '&event_id=' + event_id, function(images) {
+    // ask server for images bigger than {lastId}
+    $.get('view_images?last_id=' + lastId + '&event_id=' + event_id, function(images) {
       var media = images.media;
         writeToHTML(media);
         if (media.length > 0) {
-          lastTimestamp = new Date(media[0].created_at).getTime();
+          lastId = media[0].id;
         } else {
-          lastTimestamp = null;
+          lastId = null;
         }
     });
 }

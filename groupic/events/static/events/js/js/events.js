@@ -12,7 +12,11 @@ function loadEvent(id){
             loadPhotos(eventOb.media);
             $("#photosGallery").show();
             $("#photosGallery").data('id', id);
-            $("#photosGallery").data('lastId', eventOb.media[0].id or 0);
+            var lastId = 0;
+            if (eventOb.media.length) {
+              lastId = eventOb.media[0].id;
+            }
+            $("#photosGallery").data('lastId', lastId);
             $(".backbtn").show();
 
             $('.eventPhotoElement').each(function(i) {

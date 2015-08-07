@@ -45,6 +45,9 @@ function loadPhotos(photos){
 
     //create elements for images underneat main
     for(var i = 0; i < photos.length; i++){
+        if (i == 0) {
+
+        };
         $( "#photosGallery" ).append( getPhotoElement(photos[i].thumbnail, photos[i].username, photos[i].full_res));
     }
     $("#photosGallery").show();
@@ -290,22 +293,64 @@ $(".backbtn").click(function() {
 
 function newImages(now) {
     //send request to server with {now} and server return images with timestamp > {now}
-
+    var images = requestImagesFromServer(now);
     //transform from json to html
-
-    //return images
-
+    writeToHTML(images);
 }
 
-// $(".json").click(function() {
-//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore( $("#arrange") );
-//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore($("#arrange"));
-//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore($("#arrange"));
-//     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore($("#arrange"));
-// });
+function requestImagesFromServer (now) {
+    // ask server for images bigger than {now}
+    return [{
+    "created_time": 1406235540,
+    "full_res": "http://static.dnaindia.com/sites/default/files/2015/06/26/349928-paolo-gurrero-peru-reuters-crop.jpg",
+    "like_count": 9,
+    "location": "",
+    "tags": ["copaamerica", "copa_america2015"],
+    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/06/22/348687-reuters-copa-america-thiago-silva.jpg",
+    "username": "2"
+}, {
+    "created_time": 1406235540,
+    "full_res": "http://static.dnaindia.com/sites/default/files/2015/07/06/353041-leo-messi-after-copa-america-final-afp-crop.jpg",
+    "like_count": 9,
+    "location": "",
+    "tags": ["copaamerica", "copa_america2015"],
+    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/07/06/353041-leo-messi-after-copa-america-final-afp-crop.jpg",
+    "username": "3"
+}, {
+    "created_time": 1406235540,
+    "full_res": "http://static.dnaindia.com/sites/default/files/2015/06/20/348098-afp-copa-america-chile-bolivia-ed.jpg",
+    "like_count": 9,
+    "location": "",
+    "tags": ["copaamerica", "copa_america2015"],
+    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/06/20/348098-afp-copa-america-chile-bolivia-ed.jpg",
+    "username": "4"
+}, {
+    "created_time": 1406235540,
+    "full_res": "http://static.dnaindia.com/sites/default/files/2015/07/09/354106-argentina-team.jpg",
+    "like_count": 9,
+    "location": "",
+    "tags": ["copaamerica", "copa_america2015"],
+    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/07/09/354106-argentina-team.jpg",
+    "username": "5"
+}, {
+    "created_time": 1406235540,
+    "full_res": "http://static.dnaindia.com/sites/default/files/2015/06/27/350236-carlos-tevez-reuters-crop.jpg",
+    "like_count": 9,
+    "location": "",
+    "tags": ["copaamerica", "copa_america2015"],
+    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/06/27/350236-carlos-tevez-reuters-crop.jpg",
+    "username": "6"
+}]
+}
 
-
-
-// http://photogallery.indiatimes.com/photodhamal-sports/football/germany-beat-argentina-for-world-cup-glory/photo/38355346/Germanys-forward-Andre-Schuerrle-front-C-and-team-mates-celebrate-with-the-World-Cup-trophy-after-they-won-the-2014-FIFA-World-Cup-final-football-match-between-Germany-and-Argentina-1-0-following-extra-time-at-the-Maracana-Stadium-in-Rio-de-Janeiro-Brazil-on-July-13-2014-.jpg
-
-//<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption> --></figure>';
+function writeToHTML (images) {
+    // Json to html
+    for (var i = 0; i <= images.length - 1; i++) {
+        var fullimage = images[i].full_res
+        var thumbnailurl = images[i].thumbnail
+        var caption = images[i].username
+        $( "#photosGallery" ).prepend('<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail thumb" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption> --></figure>');
+        console.log('<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail thumb" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption> --></figure>');
+    };
+    console.log("writeToHTML");
+}

@@ -307,8 +307,6 @@ function requestImagesFromServer(callback) {
         writeToHTML(media);
         if (media.length > 0) {
           lastId = media[0].id;
-        } else {
-          lastId = null;
         }
     });
 }

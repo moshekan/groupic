@@ -105,11 +105,11 @@ def handle_uploaded_file(f, media_id):
     else:
         filename = '{0}.png'.format(media_id)
         client = dropbox.client.DropboxClient(settings.DROPBOX_ACCESS_TOKEN)
-        write_file_to_dropbox(client, f, filename)
+        filename = write_file_to_dropbox(client, f, filename)
         return get_dropbox_filename(client, filename)
 
 def write_file_to_dropbox(client, f, filename):
-    client.put_file(filename, f)
+    return client.put_file(filename, f).get('path')
 
 def get_dropbox_filename(client, filename):
     url = client.share(filename, short_url=False).get('url')

@@ -283,12 +283,17 @@ $(".backbtn").click(function() {
 
 (function(){
     var now = Math.floor(Date.now() / 1000);
-    alert("send to server " + now);
+    console.log("send to server " + now);
     newImages(now);
     setTimeout(arguments.callee, 10000);
 })();
 
 function newImages(now) {
+    //send request to server with {now} and server return images with timestamp > {now}
+
+    //transform from json to html
+
+    //return images
 
 }
 

@@ -72,12 +72,13 @@ def upload_image(request):
 		# TODO ensure user is part of the event
 		media = Media(event=Event.objects.get(str_id=event_id))
                 media.save()
-		filename = request.build_absolute_uri('events/static/events/images/{0}.png'.format(media.id))
+                filename = '/static/events/images/gallery/{0}.png'.format(media.id)
+                dst_filename = 'events' + filename
 		media.full_res = filename
 		# TODO create a real thumbnail			
 		media.thumbnail = filename
 		media.save()
-		handle_uploaded_file(request.FILES['media_data'], filename)
+		handle_uploaded_file(request.FILES['media_data'], dst_filename)
 	except ObjectDoesNotExist:
 		success = False
 		error_msg = "Event %s does not exist" % event_id
@@ -88,9 +89,9 @@ def upload_image(request):
 	return { 'success' : success, 'error_msg': error_msg}
 
 def handle_uploaded_file(f, filename):
-	with open(filename, 'wb+') as destination:
+	with open(filename, 'wb+') as dst:
 		for chunk in f.chunks():
-			destination.write(chunk)
+			dst.write(chunk)
 @require_http_methods(["POST"])
 @ajax_request
 @csrf_exempt

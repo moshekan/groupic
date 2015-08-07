@@ -106,7 +106,7 @@ def write_file_to_dropbox(client, f, filename):
     client.put_file(filename, f)
 
 def get_dropbox_filename(client, filename):
-    return client.share(filename).get('url')
+    return client.share(filename).get('url') + "?raw=1"
 
 def write_file_to_disk(f, filename):
 	with open(filename, 'wb+') as dst:

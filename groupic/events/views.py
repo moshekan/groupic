@@ -69,6 +69,7 @@ def get_serial_events():
 def upload_image(request):
 	success = True
 	error_msg = ""	
+        obj_created = None
 	try:
 		event_id = request.POST.get('event_id')
 		# TODO ensure user is part of the event
@@ -79,6 +80,7 @@ def upload_image(request):
 		# TODO create a real thumbnail			
 		media.thumbnail = filename
 		media.save()
+                obj_created = media.serialize()
 	except ObjectDoesNotExist:
 		success = False
 		error_msg = "Event %s does not exist" % event_id
@@ -86,7 +88,7 @@ def upload_image(request):
 	except Exception as e:
 		success = False
 		error_msg = str(e)
-	return { 'success' : success, 'error_msg': error_msg}
+        return { 'success' : success, 'error_msg': error_msg, 'obj_created': obj_created}
 
 def handle_uploaded_file(f, media_id):
     if settings.DROPBOX_ACCESS_TOKEN is None:

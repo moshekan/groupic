@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from annoying.functions import get_object_or_None
 
 from annoying.decorators import ajax_request, render_to
@@ -10,6 +11,7 @@ from django.core import serializers
 from events.models import Media
 from models import Event
 
+import dropbox
 import json
 import os.path as path
 FILENAME=path.join(path.dirname(path.realpath(__file__)), FILENAME)
@@ -72,13 +74,11 @@ def upload_image(request):
 		# TODO ensure user is part of the event
 		media = Media(event=Event.objects.get(str_id=event_id))
                 media.save()
-                filename = '/static/events/images/gallery/{0}.png'.format(media.id)
-                dst_filename = 'events' + filename
+		filename = handle_uploaded_file(request.FILES['media_data'], media.id)
 		media.full_res = filename
 		# TODO create a real thumbnail			
 		media.thumbnail = filename
 		media.save()
-		handle_uploaded_file(request.FILES['media_data'], dst_filename)
 	except ObjectDoesNotExist:
 		success = False
 		error_msg = "Event %s does not exist" % event_id
@@ -88,10 +88,29 @@ def upload_image(request):
 		error_msg = str(e)
 	return { 'success' : success, 'error_msg': error_msg}
 
-def handle_uploaded_file(f, filename):
+def handle_uploaded_file(f, media_id):
+    if settings.DROPBOX_ACCESS_TOKEN is None:
+        filename = '/static/events/images/gallery/{0}.png'.format(media_id)
+        dst_filename = 'events' + filename
+        write_file_to_disk(f, dst_filename)
+        return filename
+    else:
+        filename = '{0}.png'.format(media_id)
+        client = dropbox.client.DropboxClient(settings.DROPBOX_ACCESS_TOKEN)
+        write_file_to_dropbox(client, f, filename)
+        return get_dropbox_filename(client, filename)
+
+def write_file_to_dropbox(client, f, filename):
+    client.put_file(filename, f)
+
+def get_dropbox_filename(client, filename):
+    return client.share(filename).get('url')
+
+def write_file_to_disk(f, filename):
 	with open(filename, 'wb+') as dst:
 		for chunk in f.chunks():
 			dst.write(chunk)
+
 @require_http_methods(["POST"])
 @ajax_request
 @csrf_exempt

@@ -97,6 +97,8 @@ DATABASES['default'] =  dj_database_url.config() or  {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 
+DROPBOX_ACCESS_TOKEN = os.environ.get('DROPBOX_ACCESS_TOKEN')
+
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

@@ -13,10 +13,8 @@ function loadEvent(id){
             $("#photosGallery").show();
             $(".backbtn").show();
 
-            $("json").show();
-
             $('.eventPhotoElement').each(function(i) {
-                $(this).children().children().css({ opacity : "0"}).delay(800*i).animate({ opacity : "1"})
+                $(this).children().children().css({ opacity : "0"}).delay(400*i).animate({ opacity : "1"})
             });
 
 
@@ -283,10 +281,16 @@ $(".backbtn").click(function() {
     $("#eventsGallery").show();
 });
 
-// (function(){
-//     alert("send to server " + Math.floor(Date.now() / 1000));
-//     setTimeout(arguments.callee, 10000);
-// })();
+(function(){
+    var now = Math.floor(Date.now() / 1000);
+    alert("send to server " + now);
+    newImages(now);
+    setTimeout(arguments.callee, 10000);
+})();
+
+function newImages(now) {
+
+}
 
 // $(".json").click(function() {
 //     $("<figure id="arrange" class="eventPhotoElement" itemprop="associatedMedia" itemscope itemtype="http:\/\/schema.org/ImageObject"><a itemprop="contentUrl" data-size="600x400"><img fullimageurl="'+fullimage+'" src="'+thumbnailurl+'" itemprop="thumbnail" alt="Image description" class="img-thumbnail" /></a><!-- <figcaption class="animate" itemprop="'+caption+'">'+caption+'</figcaption></figure>").insertBefore( $("#arrange") );

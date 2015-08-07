@@ -42,7 +42,7 @@
                 
                     {%for key,value in events.items%}
                     <div id="{{key}}" class="click">
-                        <li  class="span3 gallery-item" data-id="id-{{ forloop.counter }}" data-type="illustration">
+                      <li  class="span3 gallery-item" data-id="id-{{ forloop.counter }}" data-type="illustration">
                         <span  class="gallery-hover-4col hidden-phone hidden-tablet">
                             <span class="gallery-icons">
                                 <a href="{{value.media.0.full_res}}" class="item-details-link" title="{{value.name}}" data-rel="prettyPhoto"></a>

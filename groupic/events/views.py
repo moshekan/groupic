@@ -145,8 +145,12 @@ def view_images(request):
 		if timestamp is None:
 			media = event.media_set.all()
 		else:
-			dt = datetime.datetime.fromtimestamp(int(timestamp)/1000.0)
-			media = event.media_set.filter(created_at__gt=dt)
+                        try:
+                            timestamp = int(timestamp)
+                            dt = datetime.datetime.fromtimestamp(int(timestamp)/1000.0)
+                            media = event.media_set.filter(created_at__gt=dt).exclude(full_res__exact='')
+                        except ValueError:
+                            media = []
 	else:
 		media = []  
 	return {'media' : map(lambda x: x.serialize(), reversed(media))}

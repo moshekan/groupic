@@ -12,6 +12,7 @@ function loadEvent(id){
             loadPhotos(eventOb.media);
             $("#photosGallery").show();
             $("#photosGallery").data('id', id);
+            $("#photosGallery").data('lastTimestamp', new Date().getTime());
             $(".backbtn").show();
 
             $('.eventPhotoElement').each(function(i) {
@@ -287,18 +288,28 @@ $(".backbtn").click(function() {
     $(".event_id").html("");
 });
 
+var POLL_FREQ = 10000;
+var lastTimestamp = null;
 (function(){
-    var now = new Date().getTime();
-    console.log("send to server " + now);
-    requestImagesFromServer(now, writeToHTML);
-    setTimeout(arguments.callee, 10000);
+    requestImagesFromServer(writeToHTML);
+    setTimeout(arguments.callee, POLL_FREQ);
 })();
 
-function requestImagesFromServer (now, callback) {
+function requestImagesFromServer(callback) {
+    if (!lastTimestamp) {
+      lastTimestamp = $('#photosGallery').data('lastTimestamp')
+    }
+    console.log("send to server " + lastTimestamp);
     var event_id = $("#photosGallery").data('id');
-    // ask server for images bigger than {now}
-    $.get('view_images?timestamp=' + now + '&event_id=' + event_id, function(images) {
-        writeToHTML(images.media)
+    // ask server for images bigger than {lastTimestamp}
+    $.get('view_images?timestamp=' + lastTimestamp + '&event_id=' + event_id, function(images) {
+      var media = images.media;
+        writeToHTML(media);
+        if (media.length > 0) {
+          lastTimestamp = new Date(media[0].created_at).getTime();
+        } else {
+          lastTimestamp = null;
+        }
     });
 }
 

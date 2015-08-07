@@ -11,6 +11,7 @@ function loadEvent(id){
             //When ajax request ends- loadPhotos(photos)
             loadPhotos(eventOb.media);
             $("#photosGallery").show();
+            $("#photosGallery").data('id', id);
             $(".backbtn").show();
 
             $('.eventPhotoElement').each(function(i) {
@@ -21,6 +22,7 @@ function loadEvent(id){
             initPhotoSwipeFromDOM('#photosGallery');
 
             id = id.replace(/-/g, " ");
+            $(".header1").show();
             $(".header1").html(id);
 
             $(".section-title").hide();
@@ -282,65 +284,22 @@ $(".backbtn").click(function() {
     $(".backbtn").hide();
     $(".header1").hide();
     $("#eventsGallery").show();
+    $(".event_id").html("");
 });
 
 (function(){
-    var now = Math.floor(Date.now() / 1000);
+    var now = new Date().getTime();
     console.log("send to server " + now);
-    newImages(now);
+    requestImagesFromServer(now, writeToHTML);
     setTimeout(arguments.callee, 10000);
 })();
 
-function newImages(now) {
-    //send request to server with {now} and server return images with timestamp > {now}
-    var images = requestImagesFromServer(now);
-    //transform from json to html
-    writeToHTML(images);
-}
-
-function requestImagesFromServer (now) {
+function requestImagesFromServer (now, callback) {
+    var event_id = $("#photosGallery").data('id');
     // ask server for images bigger than {now}
-    return [{
-    "created_time": 1406235540,
-    "full_res": "http://static.dnaindia.com/sites/default/files/2015/06/26/349928-paolo-gurrero-peru-reuters-crop.jpg",
-    "like_count": 9,
-    "location": "",
-    "tags": ["copaamerica", "copa_america2015"],
-    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/06/22/348687-reuters-copa-america-thiago-silva.jpg",
-    "username": "2"
-}, {
-    "created_time": 1406235540,
-    "full_res": "http://static.dnaindia.com/sites/default/files/2015/07/06/353041-leo-messi-after-copa-america-final-afp-crop.jpg",
-    "like_count": 9,
-    "location": "",
-    "tags": ["copaamerica", "copa_america2015"],
-    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/07/06/353041-leo-messi-after-copa-america-final-afp-crop.jpg",
-    "username": "3"
-}, {
-    "created_time": 1406235540,
-    "full_res": "http://static.dnaindia.com/sites/default/files/2015/06/20/348098-afp-copa-america-chile-bolivia-ed.jpg",
-    "like_count": 9,
-    "location": "",
-    "tags": ["copaamerica", "copa_america2015"],
-    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/06/20/348098-afp-copa-america-chile-bolivia-ed.jpg",
-    "username": "4"
-}, {
-    "created_time": 1406235540,
-    "full_res": "http://static.dnaindia.com/sites/default/files/2015/07/09/354106-argentina-team.jpg",
-    "like_count": 9,
-    "location": "",
-    "tags": ["copaamerica", "copa_america2015"],
-    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/07/09/354106-argentina-team.jpg",
-    "username": "5"
-}, {
-    "created_time": 1406235540,
-    "full_res": "http://static.dnaindia.com/sites/default/files/2015/06/27/350236-carlos-tevez-reuters-crop.jpg",
-    "like_count": 9,
-    "location": "",
-    "tags": ["copaamerica", "copa_america2015"],
-    "thumbnail": "http://static.dnaindia.com/sites/default/files/2015/06/27/350236-carlos-tevez-reuters-crop.jpg",
-    "username": "6"
-}]
+    $.get('view_images?timestamp=' + now + '&event_id=' + event_id, function(images) {
+        writeToHTML(images.media)
+    });
 }
 
 function writeToHTML (images) {

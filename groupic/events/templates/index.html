@@ -200,7 +200,7 @@
             <div id="lightbox" class="row">
                 <div id="eventsGallery">
                     {%for key,value in events.items%}
-                        <div class="col-sm-6 col-md-3 col-lg-3 branding click" onclick="loadEvent('{{ key }}')">
+                        <div class="col-sm-6 col-md-3 col-lg-3 branding click" data-id="{{ key }}" onclick="loadEvent('{{ key }}')">
                             <div class="portfolio-item">
                                 <div class="hover-bg">
                                     <div class="hover-text">

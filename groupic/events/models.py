@@ -17,13 +17,14 @@ class Event(models.Model):
 	barcode = models.CharField(max_length=255)
 	
 	def serialize(self):
+                media = reversed(self.media_set.all())
 		return {
 			'name': self.name,
 			'str_id': self.str_id,
 			'is_public':self.is_public,
 			'city':self.city,
 			'admin': serialize_user(self.admin),
-			'media': map(lambda x: x.serialize(), self.media_set.all())
+			'media': map(lambda x: x.serialize(), media)
 			}
 			
 	def __unicode__(self):
@@ -32,7 +33,7 @@ class Event(models.Model):
 class Media(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	full_res = models.TextField()
-	thumbnail =models.TextField()
+	thumbnail = models.TextField()
 	user = models.ForeignKey(User, null=True, blank=True, default=None)
 	event = models.ForeignKey(Event)
 

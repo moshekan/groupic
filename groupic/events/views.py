@@ -108,7 +108,9 @@ def write_file_to_dropbox(client, f, filename):
     client.put_file(filename, f)
 
 def get_dropbox_filename(client, filename):
-    return client.share(filename).get('url') + "?raw=1"
+    url = client.share(filename, short_url=False).get('url')
+    url = url.replace("www.dropbox.com", "dl.dropboxusercontent.com") # raw image
+    return url
 
 def write_file_to_disk(f, filename):
 	with open(filename, 'wb+') as dst:
@@ -147,4 +149,4 @@ def view_images(request):
 			media = event.media_set.filter(created_at__gt=dt)
 	else:
 		media = []  
-	return {'media' : map(lambda x: x.serialize(), media)}
+	return {'media' : map(lambda x: x.serialize(), reversed(media))}

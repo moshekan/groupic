@@ -1,5 +1,5 @@
 $(".json").hide();
-
+$(".backbtn").hide();
 function loadEvent(id){
     console.log("Load Events " + id);
     //Put loading symbol
@@ -11,7 +11,7 @@ function loadEvent(id){
             //When ajax request ends- loadPhotos(photos)
             loadPhotos(eventOb.media);
             $("#photosGallery").show();
-            // $(".eventPhotoElement").hide();
+            $(".backbtn").show();
 
             $("json").show();
 
@@ -20,8 +20,7 @@ function loadEvent(id){
             });
 
 
-            initPhotoSwipeFromDOM('#photosGallery');    
-            $(".backbtn").show();
+            initPhotoSwipeFromDOM('#photosGallery');
 
             id = id.replace(/-/g, " ");
             $(".header1").html(id);
@@ -273,6 +272,16 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
     }
 };
+
+$(".backbtn").click(function() {
+    $("#photosGallery").hide();
+    $("json").hide();
+    $(".eventPhotoElement").hide();
+    $(".section-title").show();
+    $(".backbtn").hide();
+    $(".header1").hide();
+    $("#eventsGallery").show();
+});
 
 // (function(){
 //     alert("send to server " + Math.floor(Date.now() / 1000));

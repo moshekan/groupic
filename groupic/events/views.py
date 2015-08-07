@@ -72,7 +72,7 @@ def upload_image(request):
 		# TODO ensure user is part of the event
 		media = Media(event=Event.objects.get(str_id=event_id))
                 media.save()
-		filename = 'events/static/events/images/{0}.png'.format(media.id)
+		filename = request.build_absolute_uri('events/static/events/images/{0}.png'.format(media.id))
 		media.full_res = filename
 		# TODO create a real thumbnail			
 		media.thumbnail = filename

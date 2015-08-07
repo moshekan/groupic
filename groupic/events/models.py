@@ -46,7 +46,7 @@ class Media(models.Model):
 		}
 
 	def __unicode__(self):
-		return u"Media %s" % self.str_full_res
+		return u"Media %s" % self.full_res
 
 def serialize_user(user):
 	if user:

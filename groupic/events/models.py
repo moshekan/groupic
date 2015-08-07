@@ -15,6 +15,7 @@ class Event(models.Model):
 	users = models.ManyToManyField(User, related_name='user', blank=True)
 	admin = models.ForeignKey(User, related_name='admin', null=True, blank=True, default = None)
 	barcode = models.CharField(max_length=255)
+	created_at = models.DateTimeField(auto_now_add=True)
 	
 	def serialize(self):
                 media = reversed(self.media_set.all())

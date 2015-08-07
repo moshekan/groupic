@@ -10,6 +10,7 @@ from get_instagram_data import FILENAME
 from django.core import serializers
 from events.models import Media
 from models import Event
+from collections import OrderedDict
 
 import dropbox
 import json
@@ -54,8 +55,11 @@ def get_json_data(filename):
 		return json.loads(f.read())
 
 def get_serial_events():
-	events = Event.objects.all() or {}
-	return {event.str_id: event.serialize() for event in events }
+	events = Event.objects.all().order_by('-created_at') or {}
+        e_dict = OrderedDict()
+        for event in events:
+            e_dict[event.str_id] = event.serialize()
+        return e_dict
 
 #SUNDAY DEMO
 

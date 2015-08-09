@@ -130,7 +130,7 @@ def join_private_event(request):
 	event = {}		
 	try:
 		barcode = request.POST.get('barcode')
-		event = Event.objects.get(barcode=barcode)
+		event = Event.objects.get(barcode=barcode).serialize()
 		#event.users.add(auth.get_user(request))
 	except ObjectDoesNotExist:
 		success = False
@@ -138,7 +138,7 @@ def join_private_event(request):
 	except Exception as e:
 		success = False
 		error_msg = str(e)
-	return { 'success' : success, 'error_msg': error_msg, 'event' : event.serialize()}
+	return { 'success' : success, 'error_msg': error_msg, 'event' : event}
 
 @ajax_request
 def view_images(request):

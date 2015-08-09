@@ -292,7 +292,7 @@ $(".backbtn").click(function() {
     $(".event_id").html("");
 });
 
-var POLL_FREQ = 10000;
+var POLL_FREQ = 5000;
 var lastId = null;
 (function(){
     requestImagesFromServer(writeToHTML);

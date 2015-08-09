@@ -30,9 +30,9 @@ SYRIA = (34.802075, 38.996815)
 
 
 EVENTS = {
-# 'gaza-war-2015': {'tags': {'gaza','gaza4life','gazawillbefree','gazaunderattack'},
+# 'gaza-war-2014': {'tags': {'gaza','gaza4life','gazawillbefree','gazaunderattack'},
 # 		'locations': [GAZA, JERUSALEM, RAMALLAH],
-# 		'name': "Gaza War 2015"
+# 		'name': "Gaza War 2014"
 # 		},
 'olympics-summer-2012': {'tags': {'olympics', 'olympics2012', 'olympicsherewecome'}, 
 		'locations': [LONDON],

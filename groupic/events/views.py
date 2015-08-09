@@ -147,7 +147,7 @@ def view_images(request):
 	event = get_object_or_None(Event, str_id=str_id)
 	if event:    	
 		if last_id is None:
-			media = event.media_set.all()
+			media = event.media_set.all().exclude(full_res__exact='')
 		else:
                         try:
                             last_id = int(last_id)
